@@ -1,12 +1,14 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { constants } from "../shared/constant.js";
+import { MongoClient } from "mongodb";
 import { SaveUserFactory } from "../factory/user/save.js";
-import Database from "../database/client.js";
+
+const client = new MongoClient(constants.MONGODB_URI);
 
 export const auth = betterAuth({
-  database: mongodbAdapter(Database.client.db(constants.MONGODB_NAME_DATABASE), {
-    client: Database.client,
+  database: mongodbAdapter(client.db(constants.MONGODB_NAME_DATABASE), {
+    client: client,
   }),
   advanced: {
     database: {
