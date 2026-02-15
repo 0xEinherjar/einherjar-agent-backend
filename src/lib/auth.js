@@ -12,10 +12,13 @@ export const auth = betterAuth({
     database: {
       generateId: "uuid",
     },
-    useSecureCookies: true,
-    defaultCookieAttributes: {
-      sameSite: "none",
-      secure: true,
+    cookies: {
+      state: {
+        attributes: {
+          sameSite: "none",
+          secure: true,
+        }
+      }
     }
   },
   secret: constants.BETTER_AUTH_SECRET,
