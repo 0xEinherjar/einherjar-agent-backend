@@ -24,7 +24,7 @@ export function validateEnv() {
     return envSchema.parse(process.env);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const missingVars = error.errors.map(err => `${err.path.join(".")}: ${err.message}`).join("\n");
+      const missingVars = error.issues.map(err => `${err.path.join(".")}: ${err.message}`).join("\n");
       console.error("❌ CRITICAL: Missing Environment Variables:\n" + missingVars);
       throw new Error(`Invalid environment variables:\n${missingVars}`);
     }
