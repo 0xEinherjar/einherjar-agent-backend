@@ -12,6 +12,9 @@ export const auth = betterAuth({
     database: {
       generateId: "uuid",
     },
+    crossSubDomainCookies: {
+      domain: ".up.railway.app",
+    },
     cookies: {
       state: {
         attributes: {
@@ -19,6 +22,12 @@ export const auth = betterAuth({
           secure: true,
         }
       }
+    }
+  },
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 60 * 60 * 24 * 7, // 7 dias
     }
   },
   secret: constants.BETTER_AUTH_SECRET,
