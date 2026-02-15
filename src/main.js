@@ -25,26 +25,37 @@ app.use("/api/user", userRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-const server = app.listen(constants.PORT).once("listening", async () => {
+let server;
+
+async function startServer() {
   try {
-    await database.connect()
-    // startTwitterService();
-    console.log(`Server running on port ${constants.PORT}`);
+    await database.connect();
+    console.log("DB connection established");
+
+    server = app.listen(constants.PORT, () => {
+      console.log(`Server running on port ${constants.PORT}`);
+    });
   } catch (error) {
     console.error("Failed to start server:", error);
     process.exit(1);
   }
-});
+}
+
+startServer();
 
 function gracefulShutdown(event) {
   return (code) => {
     console.log(`${event} received! with ${code}`);
-    server.close(async () => {
-      console.log("http server closed");
-      await database.close()
-      console.log("DB connection closed");
+    if (server) {
+      server.close(async () => {
+        console.log("http server closed");
+        await database.close();
+        console.log("DB connection closed");
+        process.exit(code);
+      });
+    } else {
       process.exit(code);
-    })
+    }
   }
 }
 
