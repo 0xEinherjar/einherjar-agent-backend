@@ -34,6 +34,6 @@ export const apiRateLimiter = rateLimit({
 
 // CORS configuration
 export const corsOptions = {
-  origin: [constants.FRONTEND_URL, constants.FRONTEND_URL.replace(/\/$/, "")],
+  origin: true,
   credentials: true,
 };

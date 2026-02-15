@@ -16,7 +16,7 @@ const app = express();
 const database = new Database();
 
 app.use(requestLogger);
-app.use(securityMiddleware);
+// app.use(securityMiddleware);
 app.use(cors(corsOptions));
 app.all("/api/auth/{*any}", authRateLimiter, toNodeHandler(auth));
 app.use(express.json());
