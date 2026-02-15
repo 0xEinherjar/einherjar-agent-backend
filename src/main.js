@@ -15,7 +15,6 @@ import { startTwitterService } from "./twitter.js";
 const app = express();
 const database = new Database();
 
-app.set("trust proxy", 1);
 app.use(requestLogger);
 app.use(securityMiddleware);
 app.use(cors(corsOptions));
