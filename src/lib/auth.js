@@ -16,6 +16,7 @@ export const auth = betterAuth({
     }
   },
   secret: constants.BETTER_AUTH_SECRET,
+  baseURL: constants.BETTER_AUTH_URL,
   socialProviders: {
     twitter: {
       clientId: constants.TWITTER_CLIENT_ID,

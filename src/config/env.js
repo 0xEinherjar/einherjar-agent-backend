@@ -16,6 +16,7 @@ const envSchema = z.object({
   LLM_MODEL: z.string().min(1, "LLM_MODEL is required"),
   PRIVY_APP_ID: z.string().min(1, "PRIVY_APP_ID is required"),
   PRIVY_APP_SECRET: z.string().min(1, "PRIVY_APP_SECRET is required"),
+  BETTER_AUTH_URL: z.string().url("BETTER_AUTH_URL must be a valid URL"),
   FRONTEND_URL: z.string().url("FRONTEND_URL must be a valid URL"),
 });
 
