@@ -22,7 +22,6 @@ export const auth = betterAuth({
       clientSecret: constants.TWITTER_CLIENT_SECRET,
     }
   },
-  trustedOrigins: [constants.FRONTEND_URL],
   databaseHooks: {
     account: {
       create: {
