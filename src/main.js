@@ -10,11 +10,12 @@ import errorHandler from "./middleware/error-handler.js";
 import notFoundHandler from "./middleware/not-found.js";
 import { corsOptions, securityMiddleware, apiRateLimiter, authRateLimiter } from "./middleware/security.js";
 import userRouter from "./router/user.js";
-import { startTwitterService } from './twitter.js';
+import { startTwitterService } from "./twitter.js";
 
 const app = express();
 const database = new Database();
 
+app.set("trust proxy", 1);
 app.use(requestLogger);
 app.use(securityMiddleware);
 app.use(cors(corsOptions));
