@@ -11,6 +11,11 @@ export const auth = betterAuth({
   advanced: {
     database: {
       generateId: "uuid",
+    },
+    useSecureCookies: true,
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
     }
   },
   secret: constants.BETTER_AUTH_SECRET,
