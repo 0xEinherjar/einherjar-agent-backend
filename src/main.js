@@ -15,8 +15,9 @@ import { startTwitterService } from "./twitter.js";
 const app = express();
 const database = new Database();
 
+app.set("trust proxy", 1);
 app.use(requestLogger);
-// app.use(securityMiddleware);
+app.use(securityMiddleware);
 app.use(cors(corsOptions));
 app.all("/api/auth/{*any}", authRateLimiter, toNodeHandler(auth));
 app.use(express.json());
@@ -29,7 +30,7 @@ const server = app.listen(constants.PORT).once("listening", async () => {
   try {
     await database.connect()
     // startTwitterService();
-    console.log(`Server running on port ${constants.PORT}`);
+      console.log(`Server running on port ${constants.PORT}`);
   } catch (error) {
     console.error("Failed to start server:", error);
     process.exit(1);
