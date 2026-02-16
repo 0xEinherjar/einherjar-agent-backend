@@ -8,7 +8,7 @@ import Database from "./database/client.js";
 import requestLogger from "./middleware/request-logger.js";
 import errorHandler from "./middleware/error-handler.js";
 import notFoundHandler from "./middleware/not-found.js";
-import { corsOptions, securityMiddleware, apiRateLimiter, authRateLimiter } from "./middleware/security.js";
+import { corsOptions, securityMiddleware, apiRateLimiter } from "./middleware/security.js";
 import userRouter from "./router/user.js";
 import { startTwitterService } from "./twitter.js";
 
@@ -19,7 +19,7 @@ app.set("trust proxy", 1);
 app.use(requestLogger);
 app.use(securityMiddleware);
 app.use(cors(corsOptions));
-app.all("/api/auth/{*any}", authRateLimiter, toNodeHandler(auth));
+app.all("/api/auth/{*any}", toNodeHandler(auth));
 app.use(express.json());
 app.use(apiRateLimiter);
 app.use("/api/user", userRouter);
