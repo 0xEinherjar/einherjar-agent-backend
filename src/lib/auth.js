@@ -34,6 +34,7 @@ export const auth = betterAuth({
     }
   },
   session: {
+    expires: 60 * 60 * 24 * 7,
     cookieCache: {
       enabled: true,
       maxAge: 60 * 60 * 24 * 7,
@@ -41,6 +42,7 @@ export const auth = betterAuth({
   },
   secret: constants.BETTER_AUTH_SECRET,
   baseURL: constants.BETTER_AUTH_URL,
+  basePath: "/auth",
   socialProviders: {
     twitter: {
       clientId: constants.TWITTER_CLIENT_ID,
