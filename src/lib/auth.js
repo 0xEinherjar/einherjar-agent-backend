@@ -19,12 +19,6 @@ export const auth = betterAuth({
     //   domain: ".einherjar.online",
     // },
     cookies: {
-      sessionToken: {
-        attributes: {
-          sameSite: "lax",
-          secure: true,
-        }
-      },
       state: {
         attributes: {
           sameSite: "none",
