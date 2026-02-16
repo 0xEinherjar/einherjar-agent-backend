@@ -8,9 +8,9 @@ export const auth = betterAuth({
   database: mongodbAdapter(Database.client.db(constants.MONGODB_NAME_DATABASE), {
     client: Database.client,
   }),
-  account: {
-    skipStateCookieCheck: true,
-  },
+  // account: {
+  //   skipStateCookieCheck: true,
+  // },
   advanced: {
     database: {
       generateId: "uuid",
@@ -21,7 +21,7 @@ export const auth = betterAuth({
     cookies: {
       sessionToken: {
         attributes: {
-          sameSite: "none",
+          sameSite: "lax",
           secure: true,
         }
       },
