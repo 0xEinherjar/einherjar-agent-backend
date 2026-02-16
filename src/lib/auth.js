@@ -12,10 +12,16 @@ export const auth = betterAuth({
     database: {
       generateId: "uuid",
     },
-    crossSubDomainCookies: {
-      domain: ".up.railway.app",
-    },
+    // crossSubDomainCookies: {
+    //   domain: ".einherjar.online",
+    // },
     cookies: {
+      sessionToken: {
+        attributes: {
+          sameSite: "none",
+          secure: true,
+        }
+      },
       state: {
         attributes: {
           sameSite: "none",
@@ -27,7 +33,7 @@ export const auth = betterAuth({
   session: {
     cookieCache: {
       enabled: true,
-      maxAge: 60 * 60 * 24 * 7, // 7 dias
+      maxAge: 60 * 60 * 24 * 7,
     }
   },
   secret: constants.BETTER_AUTH_SECRET,
@@ -38,7 +44,7 @@ export const auth = betterAuth({
       clientSecret: constants.TWITTER_CLIENT_SECRET,
     }
   },
-  trustedOrigins: [constants.FRONTEND_URL, constants.BETTER_AUTH_URL],
+  trustedOrigins: [constants.FRONTEND_URL],
   databaseHooks: {
     account: {
       create: {
