@@ -8,6 +8,9 @@ export const auth = betterAuth({
   database: mongodbAdapter(Database.client.db(constants.MONGODB_NAME_DATABASE), {
     client: Database.client,
   }),
+  account: {
+    skipStateCookieCheck: true,
+  },
   advanced: {
     database: {
       generateId: "uuid",
