@@ -20,9 +20,9 @@ export const auth = betterAuth({
     database: {
       generateId: "uuid",
     },
-    crossSubDomainCookies: {
-      domain: ".einherjar.online",
-    },
+    // crossSubDomainCookies: {
+    //   domain: ".einherjar.online",
+    // },
     cookies: {
       state: {
         attributes: {
