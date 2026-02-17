@@ -12,11 +12,11 @@ export const auth = betterAuth({
   //   skipStateCookieCheck: true,
   // },
   advanced: {
-    useSecureCookies: true,
-    defaultCookieAttributes: {
-      sameSite: "none",
-      secure: true,
-    },
+    // useSecureCookies: true,
+    // defaultCookieAttributes: {
+    //   sameSite: "none",
+    //   secure: true,
+    // },
     database: {
       generateId: "uuid",
     },
