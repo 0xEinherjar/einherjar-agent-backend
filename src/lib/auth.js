@@ -12,12 +12,17 @@ export const auth = betterAuth({
   //   skipStateCookieCheck: true,
   // },
   advanced: {
+    useSecureCookies: true,
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
+    },
     database: {
       generateId: "uuid",
     },
-    // crossSubDomainCookies: {
-    //   domain: ".einherjar.online",
-    // },
+    crossSubDomainCookies: {
+      domain: ".einherjar.online",
+    },
     cookies: {
       state: {
         attributes: {
@@ -28,7 +33,7 @@ export const auth = betterAuth({
     }
   },
   session: {
-    // expiresIn: 60 * 60 * 24 * 7,
+    expiresIn: 60 * 60 * 24 * 7,
     cookieCache: {
       enabled: true,
       maxAge: 60 * 60 * 24 * 7,
