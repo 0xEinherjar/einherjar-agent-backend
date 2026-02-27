@@ -3,7 +3,7 @@ import { Client, OAuth1 } from '@xdevplatform/xdk';
 
 export default class XClient {
   // static sinceId = null;
-  static sinceId = "2021375963716780298";
+  static sinceId = "2027202439254782242";
 
   constructor() {
     const oauth1 = new OAuth1({

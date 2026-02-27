@@ -21,10 +21,11 @@ async function checkMentions() {
   try {
     const twitterClient = new TwitterClient();
     const mentions = await twitterClient.userMentionTimeline();
-
+    
     if (!mentions || mentions.length === 0) return;
     await Promise.all(mentions.map(async (tweet) => {
       try {
+        console.log(tweet.id, tweet.text);
         const result = await LoadUserFactory().execute({ twitterId: tweet.authorId });
         if (result.isLeft()) return;
         const response = await agent.run(tweet.authorId, tweet.text);

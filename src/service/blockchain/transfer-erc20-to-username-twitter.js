@@ -16,7 +16,7 @@ export default class Service {
       const user = await this.repository.loadOne({ twitterId: input.id });
       if (!user) return left({ type: "NOT_FOUND", message: "User not found" });
       const username = input.to.replace("@", "");
-      const userX = this.xClient.findUserByUsername(username);
+      const userX = await this.xClient.findUserByUsername(username);
       if (!userX) return left({ type: "NOT_FOUND", message: "User not found on X (twitter)" });
       let recipient = await this.repository.loadOne({ twitterId: userX.id });
       if (!recipient) {
