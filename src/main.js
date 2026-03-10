@@ -29,7 +29,7 @@ app.use(errorHandler);
 const server = app.listen(constants.PORT).once("listening", async () => {
   try {
     await database.connect()
-    startTwitterService();
+    // startTwitterService();
     console.log(`Server running on port ${constants.PORT}`);
   } catch (error) {
     console.error("Failed to start server:", error);

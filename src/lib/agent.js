@@ -16,7 +16,7 @@ const client = new MongoClient(constants.MONGODB_URI);
 export class Agent {
   constructor({ systemPrompt }) {
     this.model = new ChatOpenAI({ 
-      temperature: 1, 
+      temperature: 0.3, 
       apiKey: constants.LLM_API_KEY,
       model: constants.LLM_MODEL,
     });

@@ -1,5 +1,7 @@
 export const CHAINS_MAP = {
   ethereum_sepolia: {
+    token: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+    canonical_viem: "sepolia",
     canonical: "Ethereum_Sepolia",
     aliases: [
       "ethereum",
@@ -10,6 +12,8 @@ export const CHAINS_MAP = {
     ],
   },
   avalanche_fuji: {
+    token: "0x5425890298aed601595a70AB815c96711a31Bc65",
+    canonical_viem: "avalancheFuji",
     canonical: "Avalanche_Fuji",
     aliases: [
       "avalanche",
@@ -21,6 +25,8 @@ export const CHAINS_MAP = {
     ],
   },
   arbitrum_sepolia: {
+    token: "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d",
+    canonical_viem: "arbitrumSepolia",
     canonical: "Arbitrum_Sepolia",
     aliases: [
       "arbitrum",
@@ -29,6 +35,8 @@ export const CHAINS_MAP = {
     ],
   },
   arc_testnet: {
+    token: "0x3600000000000000000000000000000000000000",
+    canonical_viem: "arcTestnet",
     canonical: "Arc_Testnet",
     aliases: [
       "arc",
@@ -37,6 +45,8 @@ export const CHAINS_MAP = {
     ],
   },
   base_sepolia: {
+    token: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+    canonical_viem: "baseSepolia",
     canonical: "Base_Sepolia",
     aliases: [
       "base",
@@ -45,6 +55,8 @@ export const CHAINS_MAP = {
     ],
   },
   optimism_sepolia: {
+    token: "0x5fd84259d66Cd46123540766Be93DFE6D43130D7",
+    canonical_viem: "optimismSepolia",
     canonical: "Optimism_Sepolia",
     aliases: [
       "op",
@@ -54,6 +66,8 @@ export const CHAINS_MAP = {
     ],
   },
   polygon_amoy: {
+    token: "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582",
+    canonical_viem: "polygonAmoy",
     canonical: "Polygon_Amoy_Testnet",
     aliases: [
       "polygon",
@@ -86,10 +100,16 @@ export function resolveChain(input) {
         .replace(/[\u0300-\u036f]/g, "");
 
       if (normalizedInput.includes(normalizedAlias)) {
-        return chain.canonical;
+        return chain;
       }
     }
   }
 
   return null;
+}
+
+export function resolveChainWithDefault(input) {
+  const chain = resolveChain(input);
+  if (chain) return chain;
+  return CHAINS_MAP.arc_testnet;
 }

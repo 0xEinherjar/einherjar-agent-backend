@@ -16,8 +16,8 @@ export default class Service {
     const user = await this.repository.loadOne({ twitterId: input.id });
     if (!user) return left({ type: "NOT_FOUND", message: "User not found" });
 
-    const fromChain = resolveChain(input.fromChain);
-    const toChain = resolveChain(input.toChain);
+    const fromChain = resolveChain(input.fromChain).canonical;
+    const toChain = resolveChain(input.toChain).canonical;
 
     if (!fromChain || !toChain) {
       return left({ type: "INVALID_CHAIN", message: "Unsupported or unknown blockchain network" })
@@ -63,7 +63,6 @@ export default class Service {
     });
 
     const kit = new BridgeKit()
-    console.log("BridgeKit initialized");
     const result = await kit.bridge({
       from: { adapter: fromAdapter, chain: fromChain },
       to: { adapter: toAdapter, chain: toChain },

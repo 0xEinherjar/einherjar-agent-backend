@@ -1,4 +1,4 @@
-import { createWalletClient, http, publicActions, BaseError, ContractFunctionRevertedError, parseEventLogs } from "viem";
+import { createWalletClient, http, publicActions, BaseError, ContractFunctionRevertedError, parseEventLogs, formatUnits } from "viem";
 import { arcTestnet } from "viem/chains";
 import { createViemAccount } from "@privy-io/node/viem"
 import { left, right } from "../../shared/either.js";
@@ -9,7 +9,7 @@ export default class Service {
     this.repository = repository;
     this.walletProvider = walletProvider;
   }
- 
+
   async execute(input) {
     try {
       const user = await this.repository.loadOne({ twitterId: input.id });
@@ -19,19 +19,35 @@ export default class Service {
         walletId: user.walletId,
         address: user.address
       });
-      
-      const client = createWalletClient({ 
-        account: account, 
+
+      const client = createWalletClient({
+        account: account,
         chain: arcTestnet,
         transport: http()
       }).extend(publicActions);
-      
-      const { request } = await client.simulateContract({
+
+      const contractCallParams = {
         address: contract.ERC20Factory,
         abi: abi.ERC20Factory,
         functionName: 'createToken',
         args: [input.name, input.symbol, input.supply, user.address],
-      })
+      };
+
+      const [balance, gasEstimate, gasPrice] = await Promise.all([
+        client.getBalance({ address: user.address }),
+        client.estimateContractGas({ ...contractCallParams, account }),
+        client.getGasPrice(),
+      ]);
+
+      const estimatedCost = gasEstimate * gasPrice;
+      if (balance < estimatedCost) {
+        return left({
+          type: "INSUFFICIENT_FUNDS",
+          message: `Insufficient balance. Required: ${estimatedCost} wei, Available: ${balance} wei`,
+        });
+      }
+
+      const { request } = await client.simulateContract(contractCallParams);
 
       const hash = await client.writeContract(request);
       const receipt = await client.waitForTransactionReceipt({ hash });
@@ -40,7 +56,7 @@ export default class Service {
         abi: abi.ERC20Factory,
         eventName: 'ERC20TokenDeployed',
         logs: receipt.logs,
-      });      
+      });
 
       return right(`Token created successfully. Token contract: ${logs[0].args.tokenAddress}. Transaction hash: ${hash}`);
     } catch (error) {

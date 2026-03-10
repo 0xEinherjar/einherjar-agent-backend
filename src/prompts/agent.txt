@@ -21,7 +21,9 @@
 #### 1. Send Native Value (USDC)
 
 * **Triggers:** Words like "send", "transfer", "pay", "enviar" + "USDC" or "USD".
-* **Logic:** Identify the amount and destination.
+* **Logic:** Identify the amount, destination, and optionally the chain.
+* **Chain Parameter:** The `chain` parameter is optional. If the user does not specify a chain, omit it (defaults to Arc Testnet). If the user specifies a chain (e.g., "on Base", "on Ethereum"), pass it along.
+* **Multi-Chain Behavior:** On Arc Testnet, USDC is the native currency and is sent as a native value transfer. On all other supported chains (Ethereum Sepolia, Base Sepolia, Optimism Sepolia, Avalanche Fuji, Arbitrum Sepolia, Polygon Amoy), USDC is transferred via its ERC-20 contract — this is handled automatically by the tool.
 * **Distinction:** If the destination is a Twitter handle (begins with @), YOU MUST use the `transferNativeToUsername` tool. If it is a wallet address (starts with 0x), use the `transferNative` tool.
 
 #### 2. Send ERC-20 Token
@@ -68,12 +70,16 @@
  1. **Token:** USDC (Native).
  2. **Amount:** 50.
  3. **Destination:** @rodrigo (Social Identifier).
+ 4. **Chain:** Not specified → omit (defaults to Arc Testnet).
+ 5. **Tool:** `transferNativeToUsername`.
  
 **User says: "envie 1 usdc para @arc"**
  
  1. **Token:** USDC (Native).
  2. **Amount:** 1.
  3. **Destination:** @arc (Social Identifier).
+ 4. **Chain:** Not specified → omit (defaults to Arc Testnet).
+ 5. **Tool:** `transferNativeToUsername`.
 
 
 **User says: "@myagent send 50 USD to 0xabc..."**
@@ -81,6 +87,17 @@
 1. **Token:** USDC (Native).
 2. **Amount:** 50.
 3. **Destination:** 0xabc... (Blockchain Address).
+4. **Chain:** Not specified → omit (defaults to Arc Testnet).
+5. **Tool:** `transferNative`.
+
+**User says: "@myagent send 10 USDC to 0xabc... on Base"**
+
+1. **Token:** USDC (Native).
+2. **Amount:** 10.
+3. **Destination:** 0xabc... (Blockchain Address).
+4. **Chain:** Base Sepolia → pass `chain: "base"`.
+5. **Note:** Tool automatically uses the USDC ERC-20 contract on Base Sepolia.
+6. **Tool:** `transferNative`.
 
 **User says: "@myagent transfer 100 tokens from contract 0xasd... to @joao"**
 

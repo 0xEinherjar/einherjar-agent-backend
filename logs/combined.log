@@ -1,1 +1,181 @@
 2026-02-15 17:16:52 [info]: Twitter agent initialized successfully
+2026-03-02 23:01:25 [info]: Twitter agent initialized successfully
+2026-03-02 23:01:28 [info]: Twitter agent initialized successfully
+2026-03-02 23:04:29 [info]: Twitter agent initialized successfully
+2026-03-02 23:49:41 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 1.677 ms
+2026-03-02 23:49:41 [http]: POST /api/auth/sign-in/social 200 - - 67.829 ms
+2026-03-02 23:49:47 [http]: GET /api/auth/callback/twitter?state=yL05jKeMdtYNKSRgyCUCvKH2A7Zaybhh&code=UUgtTzdUMlhVQm5rQXFYZk5MZGVLWFRlNnA5bGMzbGZHSjFnQnZBeXFKbWt0OjE3NzI1MDYxODQyODc6MToxOmFjOjE 302 - - 1363.948 ms
+2026-03-02 23:49:48 [http]: GET /api/user 200 271 - 32.512 ms
+2026-03-02 23:53:36 [http]: GET /api/user 304 - - 23.625 ms
+2026-03-03 00:09:05 [info]: Twitter agent initialized successfully
+2026-03-03 00:09:08 [info]: Twitter agent initialized successfully
+2026-03-03 00:10:04 [http]: GET /api/user 304 - - 44.752 ms
+2026-03-03 00:10:12 [http]: GET /api/user 304 - - 25.792 ms
+2026-03-03 00:10:21 [http]: GET /api/user 304 - - 30.422 ms
+2026-03-03 00:10:51 [http]: GET /api/user 304 - - 35.869 ms
+2026-03-03 00:12:05 [http]: GET /api/user 304 - - 38.012 ms
+2026-03-03 00:21:53 [http]: GET /api/user 304 - - 24.298 ms
+2026-03-03 00:22:03 [http]: GET /api/user 304 - - 23.785 ms
+2026-03-03 00:23:14 [http]: GET /api/user 304 - - 24.073 ms
+2026-03-03 19:14:40 [info]: Twitter agent initialized successfully
+2026-03-03 19:14:43 [info]: Twitter agent initialized successfully
+2026-03-03 19:16:03 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 2.492 ms
+2026-03-03 19:16:03 [http]: POST /api/auth/sign-in/social 200 - - 86.117 ms
+2026-03-03 19:16:10 [http]: GET /api/auth/callback/twitter?state=7Kaxocmd8vNlcv3RXeI4J5ZhhTfnHGJF&code=VlpoRDNidzZQUnBPWnpua09FaHAzLVl2WHlpRlZqVFdjTl9RR2JZMUhBUmlDOjE3NzI1NzYxNjY2Njc6MToxOmFjOjE 302 - - 1471.893 ms
+2026-03-03 19:16:10 [http]: GET /api/user 304 - - 30.698 ms
+2026-03-03 19:18:08 [http]: GET /api/user 304 - - 22.838 ms
+2026-03-03 19:18:09 [http]: GET /api/user 304 - - 19.400 ms
+2026-03-03 19:18:10 [http]: GET /api/user 304 - - 21.383 ms
+2026-03-03 19:18:13 [http]: GET /api/user 304 - - 19.526 ms
+2026-03-03 19:18:20 [http]: GET /api/user 304 - - 19.831 ms
+2026-03-03 19:28:51 [http]: GET /api/user 304 - - 26.637 ms
+2026-03-03 19:28:51 [http]: GET /api/user 304 - - 29.602 ms
+2026-03-03 19:31:08 [http]: GET /api/user 304 - - 22.777 ms
+2026-03-03 19:32:44 [http]: GET /api/user 304 - - 22.584 ms
+2026-03-03 19:45:08 [info]: Twitter agent initialized successfully
+2026-03-03 19:56:54 [http]: GET /api/user 304 - - 53.972 ms
+2026-03-03 20:19:14 [http]: GET /api/user 304 - - 24.341 ms
+2026-03-03 20:25:34 [http]: GET /api/user 304 - - 26.226 ms
+2026-03-03 20:27:46 [http]: GET /api/user 304 - - 26.898 ms
+2026-03-03 20:29:54 [http]: GET /api/user 304 - - 25.675 ms
+2026-03-03 20:30:10 [http]: GET /api/user 304 - - 26.168 ms
+2026-03-03 20:30:43 [http]: GET /api/user 304 - - 23.372 ms
+2026-03-03 20:33:27 [http]: GET /api/user 304 - - 23.977 ms
+2026-03-03 20:34:20 [http]: GET /api/user 304 - - 26.213 ms
+2026-03-03 20:48:05 [info]: Twitter agent initialized successfully
+2026-03-03 20:48:08 [info]: Twitter agent initialized successfully
+2026-03-03 21:27:59 [http]: GET /api/user 304 - - 34.547 ms
+2026-03-03 21:28:28 [http]: GET /api/user 304 - - 19.863 ms
+2026-03-03 21:29:14 [http]: GET /api/user 304 - - 17.460 ms
+2026-03-03 21:29:21 [http]: GET /api/user 304 - - 19.074 ms
+2026-03-03 21:35:23 [http]: GET /api/user 304 - - 20.535 ms
+2026-03-03 21:36:21 [http]: GET /api/user 304 - - 18.757 ms
+2026-03-03 21:37:00 [http]: GET /api/user 304 - - 17.952 ms
+2026-03-03 21:37:31 [http]: GET /api/user 304 - - 18.281 ms
+2026-03-03 21:48:17 [info]: Twitter agent initialized successfully
+2026-03-03 21:48:20 [info]: Twitter agent initialized successfully
+2026-03-03 22:06:54 [http]: GET /api/user 304 - - 54.210 ms
+2026-03-03 22:49:04 [info]: Twitter agent initialized successfully
+2026-03-03 22:49:07 [info]: Twitter agent initialized successfully
+2026-03-03 23:49:44 [info]: Twitter agent initialized successfully
+2026-03-03 23:49:47 [info]: Twitter agent initialized successfully
+2026-03-04 00:30:34 [http]: GET /api/user 304 - - 44.627 ms
+2026-03-04 00:35:32 [http]: GET /api/user 304 - - 23.512 ms
+2026-03-04 00:35:35 [http]: GET /api/user 304 - - 20.627 ms
+2026-03-04 00:35:37 [http]: GET /api/user 304 - - 20.738 ms
+2026-03-04 00:35:44 [http]: GET /api/user 304 - - 19.987 ms
+2026-03-05 00:52:12 [info]: Twitter agent initialized successfully
+2026-03-05 00:52:15 [info]: Twitter agent initialized successfully
+2026-03-05 00:52:57 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 2.096 ms
+2026-03-05 00:52:57 [http]: POST /api/auth/sign-in/social 200 - - 60.198 ms
+2026-03-05 00:53:04 [http]: GET /api/auth/callback/twitter?state=X5r5gambskO3jvMaAn-W-nPEh1Dpk_Mz&code=aTA2bkxVVElQd0x1Zi1mY0wwSjVJdGpIa2lXRDJNNFFzd2J3dE41VTYwR0JDOjE3NzI2ODI3Nzk4MjE6MToxOmFjOjE 302 - - 1107.921 ms
+2026-03-05 00:53:04 [http]: GET /api/auth/error?error=unable_to_get_user_info 200 - - 3.158 ms
+2026-03-05 00:53:05 [http]: GET /favicon.ico 404 64 - 3.696 ms
+2026-03-05 00:55:56 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 0.156 ms
+2026-03-05 00:55:57 [http]: POST /api/auth/sign-in/social 200 - - 30.913 ms
+2026-03-05 00:56:02 [http]: GET /api/auth/callback/twitter?state=d2xsB3zk4_32nbgZLEO44i79228JAThn&code=NlBoLXJrYlJZMlk4STZDUDhGSExrSmlnQ2JwX2pMV182Z2lNWFJqcm4tckcyOjE3NzI2ODI5NTk0MDg6MToxOmFjOjE 302 - - 1126.071 ms
+2026-03-05 00:56:03 [http]: GET /api/user 304 - - 22.248 ms
+2026-03-05 01:19:34 [http]: GET /api/user 304 - - 24.194 ms
+2026-03-05 01:26:29 [http]: GET /api/user 304 - - 22.210 ms
+2026-03-05 01:26:59 [http]: GET /api/user 304 - - 21.295 ms
+2026-03-05 01:27:26 [http]: GET /api/user 304 - - 20.426 ms
+2026-03-05 01:31:03 [http]: GET /api/user 304 - - 25.094 ms
+2026-03-05 01:47:12 [info]: Twitter agent initialized successfully
+2026-03-05 01:56:00 [info]: Twitter agent initialized successfully
+2026-03-05 01:56:04 [info]: Twitter agent initialized successfully
+2026-03-05 01:56:04 [http]: GET /api/user 304 - - 336.995 ms
+2026-03-05 12:58:11 [info]: Twitter agent initialized successfully
+2026-03-05 12:58:15 [info]: Twitter agent initialized successfully
+2026-03-05 13:04:06 [http]: GET /api/user 304 - - 57.388 ms
+2026-03-05 13:33:08 [http]: GET /api/user 304 - - 33.681 ms
+2026-03-05 13:48:47 [http]: GET /api/user 304 - - 34.027 ms
+2026-03-05 13:58:08 [info]: Twitter agent initialized successfully
+2026-03-05 14:58:20 [info]: Twitter agent initialized successfully
+2026-03-05 14:58:23 [info]: Twitter agent initialized successfully
+2026-03-05 15:58:34 [info]: Twitter agent initialized successfully
+2026-03-05 15:58:37 [info]: Twitter agent initialized successfully
+2026-03-05 16:11:43 [http]: GET /api/user 304 - - 41.518 ms
+2026-03-05 16:11:45 [http]: GET /api/user 304 - - 25.705 ms
+2026-03-08 14:59:30 [info]: Twitter agent initialized successfully
+2026-03-08 14:59:33 [info]: Twitter agent initialized successfully
+2026-03-08 15:00:55 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 2.574 ms
+2026-03-08 15:00:55 [http]: POST /api/auth/sign-in/social 200 - - 54.599 ms
+2026-03-08 15:01:01 [http]: GET /api/auth/callback/twitter?state=BexOVlhR_5bu_pRLtLQkf5Jx5BZev7UJ&code=WHl1bVREOHM5VUc3cUQ2Vkw3b0VobTYxcXdXX28yc2k0ZUxMd05KR0xrNkowOjE3NzI5OTI4NjAzNDc6MToxOmFjOjE 302 - - 1099.638 ms
+2026-03-08 15:01:01 [http]: GET /api/user 200 271 - 27.000 ms
+2026-03-08 15:31:15 [info]: Twitter agent initialized successfully
+2026-03-08 16:31:31 [info]: Twitter agent initialized successfully
+2026-03-08 16:31:34 [info]: Twitter agent initialized successfully
+2026-03-08 17:31:42 [info]: Twitter agent initialized successfully
+2026-03-08 17:31:45 [info]: Twitter agent initialized successfully
+2026-03-08 17:46:41 [http]: GET /api/user 200 271 - 48.610 ms
+2026-03-08 17:47:03 [http]: GET /api/user 304 - - 25.535 ms
+2026-03-08 17:52:52 [http]: GET /api/user 304 - - 19.316 ms
+2026-03-08 17:53:03 [http]: GET /api/user 304 - - 15.954 ms
+2026-03-08 17:53:04 [http]: GET /api/user 304 - - 18.334 ms
+2026-03-08 17:53:07 [http]: GET /api/user 304 - - 15.443 ms
+2026-03-08 17:53:08 [http]: GET /api/user 304 - - 16.299 ms
+2026-03-08 18:00:10 [http]: GET /api/user 304 - - 16.484 ms
+2026-03-08 18:00:13 [http]: GET /api/user 304 - - 16.411 ms
+2026-03-08 18:00:14 [http]: GET /api/user 304 - - 16.745 ms
+2026-03-08 18:00:15 [http]: GET /api/user 304 - - 15.321 ms
+2026-03-08 18:00:23 [http]: GET /api/user 304 - - 14.602 ms
+2026-03-08 18:00:26 [http]: GET /api/user 304 - - 18.823 ms
+2026-03-08 18:00:30 [http]: GET /api/user 304 - - 15.525 ms
+2026-03-08 18:05:19 [http]: GET /api/user 304 - - 19.613 ms
+2026-03-08 18:05:52 [http]: GET /api/user 304 - - 14.922 ms
+2026-03-08 18:05:59 [http]: GET /api/user 304 - - 14.352 ms
+2026-03-08 18:06:02 [http]: GET /api/user 304 - - 14.283 ms
+2026-03-08 18:13:41 [http]: GET /api/user 304 - - 24.242 ms
+2026-03-08 18:14:21 [http]: GET /api/user 304 - - 18.314 ms
+2026-03-08 18:14:31 [http]: GET /api/user 304 - - 18.984 ms
+2026-03-08 18:22:21 [http]: GET /api/user 304 - - 19.612 ms
+2026-03-08 18:38:13 [http]: GET /api/user 304 - - 26.339 ms
+2026-03-08 18:49:11 [http]: GET /api/user 304 - - 24.497 ms
+2026-03-08 19:01:03 [http]: GET /api/user 304 - - 20.871 ms
+2026-03-08 19:01:08 [http]: GET /api/user 304 - - 24.952 ms
+2026-03-08 19:01:11 [http]: GET /api/user 304 - - 20.889 ms
+2026-03-08 19:01:56 [http]: GET /api/user 304 - - 21.219 ms
+2026-03-08 19:02:08 [http]: GET /api/user 304 - - 20.501 ms
+2026-03-08 19:02:11 [http]: GET /api/user 304 - - 19.557 ms
+2026-03-08 19:02:15 [http]: GET /api/user 304 - - 20.306 ms
+2026-03-08 19:02:35 [http]: GET /api/user 304 - - 21.265 ms
+2026-03-08 19:02:52 [http]: GET /api/user 304 - - 22.222 ms
+2026-03-08 19:03:42 [http]: GET /api/user 304 - - 20.609 ms
+2026-03-08 19:03:49 [http]: GET /api/user 304 - - 19.106 ms
+2026-03-08 19:03:51 [http]: GET /api/user 304 - - 19.694 ms
+2026-03-08 19:08:37 [http]: GET /api/user 304 - - 22.679 ms
+2026-03-09 00:24:12 [info]: Twitter agent initialized successfully
+2026-03-09 00:24:17 [info]: Twitter agent initialized successfully
+2026-03-09 00:32:09 [info]: Twitter agent initialized successfully
+2026-03-09 00:32:22 [info]: Twitter agent initialized successfully
+2026-03-09 00:32:39 [info]: Twitter agent initialized successfully
+2026-03-09 00:33:13 [info]: Twitter agent initialized successfully
+2026-03-09 00:33:22 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:02 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:08 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:12 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:18 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:25 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:32 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:38 [info]: Twitter agent initialized successfully
+2026-03-09 00:34:43 [info]: Twitter agent initialized successfully
+2026-03-09 00:35:04 [info]: Twitter agent initialized successfully
+2026-03-09 00:35:10 [info]: Twitter agent initialized successfully
+2026-03-09 00:35:15 [info]: Twitter agent initialized successfully
+2026-03-09 00:35:21 [info]: Twitter agent initialized successfully
+2026-03-09 00:35:51 [info]: Twitter agent initialized successfully
+2026-03-09 00:35:54 [info]: Twitter agent initialized successfully
+2026-03-09 00:36:01 [info]: Twitter agent initialized successfully
+2026-03-09 00:37:39 [info]: Twitter agent initialized successfully
+2026-03-09 00:37:50 [info]: Twitter agent initialized successfully
+2026-03-09 00:37:56 [info]: Twitter agent initialized successfully
+2026-03-09 00:37:59 [info]: Twitter agent initialized successfully
+2026-03-09 00:38:04 [info]: Twitter agent initialized successfully
+2026-03-09 00:38:24 [info]: Twitter agent initialized successfully
+2026-03-09 00:41:48 [info]: Twitter agent initialized successfully
+2026-03-09 00:42:04 [info]: Twitter agent initialized successfully
+2026-03-09 00:42:08 [info]: Twitter agent initialized successfully
+2026-03-09 00:42:36 [info]: Twitter agent initialized successfully
+2026-03-09 00:42:51 [info]: Twitter agent initialized successfully
+2026-03-09 00:43:12 [info]: Twitter agent initialized successfully
+2026-03-09 23:48:15 [info]: Twitter agent initialized successfully
