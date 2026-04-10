@@ -10,7 +10,13 @@ export const transferERC20TokenToUsername = {
     token: z.string().describe("Address of the ERC20 token contract to be transferred."),
   }),
   handle: async ({ to, value, token }, runtime) => {
-    const result = await TransferErc20ToUsernameTwitterFactory().execute({ id: runtime.context?.twitterAuthorId, to, value, token });
+    const result = await TransferErc20ToUsernameTwitterFactory().execute({
+      id: runtime.context?.authorId,
+      channel: runtime.context?.channel,
+      to,
+      value,
+      token
+    });
     if (result.isLeft()) throw new Error(result.value.message);
     return JSON.stringify(result.value);
   },

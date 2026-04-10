@@ -1,8 +1,21 @@
-import { createWalletClient, erc20Abi, http, publicActions, BaseError, ContractFunctionRevertedError, parseUnits, formatUnits } from "viem";
-import { arcTestnet } from "viem/chains";
-import { createViemAccount } from "@privy-io/node/viem";
+import { initiateDeveloperControlledWalletsClient } from "@circle-fin/developer-controlled-wallets";
+import { initiateSmartContractPlatformClient } from "@circle-fin/smart-contract-platform";
 import { left, right } from "../../shared/either.js";
+import { constants } from "../../shared/constant.js";
 import User from "../../entity/user.js";
+import { abi } from "../../abi/index.js";
+import { waitForTxCompletion } from "./helpers.js";
+import { recordMetric } from "../../shared/record-metric.js";
+
+const client = initiateDeveloperControlledWalletsClient({
+  apiKey: constants.CIRCLE_API_KEY,
+  entitySecret: constants.CIRCLE_ENTITY_SECRET,
+});
+
+const smartContractPlatformClient = initiateSmartContractPlatformClient({
+  apiKey: constants.CIRCLE_API_KEY,
+  entitySecret: constants.CIRCLE_ENTITY_SECRET,
+});
 
 export default class Service {
   constructor({ repository, walletProvider, xClient }) {
@@ -13,11 +26,14 @@ export default class Service {
 
   async execute(input) {
     try {
-      const user = await this.repository.loadOne({ twitterId: input.id });
-      if (!user) return left({ type: "NOT_FOUND", message: "User not found" });
+      if (input.channel !== "twitter") return left({ success: false, type: "BAD_REQUEST", message: "Invalid channel" });
+      const user = await this.repository.loadOne({ userId: input.id });
+      if (!user) return left({ success: false, type: "NOT_FOUND", message: "User not found" });
+
       const username = input.to.replace("@", "");
       const userX = await this.xClient.findUserByUsername(username);
-      if (!userX) return left({ type: "NOT_FOUND", message: "User not found on X (twitter)" });
+      if (!userX) return left({ success: false, type: "NOT_FOUND", message: "User not found on X (twitter)" });
+
       let recipient = await this.repository.loadOne({ twitterId: userX.id });
       if (!recipient) {
         const wallet = await this.walletProvider.createWallet();
@@ -26,62 +42,66 @@ export default class Service {
           walletId: wallet.id,
           address: wallet.address,
         });
-        if (created.isLeft()) return left({ type: "BAD_REQUEST", message: created.value });
+        if (created.isLeft()) return left({ success: false, type: "BAD_REQUEST", message: created.value });
         recipient = created.value;
         await this.repository.create(recipient);
-      };
+      }
 
-      const account = await createViemAccount(this.walletProvider.getClient(), {
+      const [decimalsRes, balanceRes] = await Promise.all([
+        smartContractPlatformClient.queryContract({
+          address: input.token,
+          blockchain: "ARC-TESTNET",
+          abiFunctionSignature: "decimals()",
+          abiJson: JSON.stringify(abi.ERC20),
+        }),
+        smartContractPlatformClient.queryContract({
+          address: input.token,
+          blockchain: "ARC-TESTNET",
+          abiFunctionSignature: "balanceOf(address)",
+          abiParameters: [user.address],
+          abiJson: JSON.stringify(abi.ERC20),
+        }),
+      ]);
+
+      const decimals = Number(decimalsRes.data?.outputValues?.[0] ?? 18);
+      const balance = Number(balanceRes.data?.outputValues?.[0] ?? "0");
+      const amount = Number(Math.round(Number(input.value) * 10 ** decimals));
+
+      if (balance < amount) {
+        return left({
+          success: false,
+          type: "NOT_ENOUGH_BALANCE",
+          message: `Insufficient funds. Available: ${balance / 10 ** decimals}, Required: ${amount / 10 ** decimals}`,
+        });
+      }
+
+      const transaction = await client.createContractExecutionTransaction({
         walletId: user.walletId,
-        address: user.address
+        contractAddress: input.token,
+        blockchain: "ARC-TESTNET",
+        abiFunctionSignature: "transfer(address,uint256)",
+        abiParameters: [recipient.address, amount],
+        fee: {
+          type: "level",
+          config: { feeLevel: "MEDIUM" },
+        },
       });
+      const txResult = await waitForTxCompletion(client, transaction.data?.id);
 
-      const client = createWalletClient({
-        account: account,
-        chain: arcTestnet,
-        transport: http(),
-      }).extend(publicActions);
-
-      const decimals = await client.readContract({
-        address: input.token,
-        abi: erc20Abi,
-        functionName: "decimals",
-      });
-
-      const balance = await client.readContract({
-        address: input.token,
-        abi: erc20Abi,
-        functionName: "balanceOf",
-        args: [account.address],
-      });
-
-      const balanceFormatted = formatUnits(balance, decimals);
-
-      if (Number(balanceFormatted) < Number(input.value)) {
-        return left({ type: "NOT_ENOUGH_BALANCE", message: "Not enough balance" });
+      if (txResult.isRight()) {
+        await recordMetric({
+          type: "TRANSACTION",
+          token: "ERC20",
+          amount: Number(input.value),
+          chain: "ARC-TESTNET",
+          userId: input.id,
+        });
       }
 
-      const valueFormatted = parseUnits(String(input.value), decimals);
-
-      const { request } = await client.simulateContract({
-        address: input.token,
-        abi: erc20Abi,
-        functionName: 'transfer',
-        args: [recipient.address, valueFormatted],
-      })
-
-      const hash = await client.writeContract(request);
-
-      return right(`Transfer completed successfully. Transaction hash: ${hash}`);
+      return txResult;
     } catch (error) {
-      if (error instanceof BaseError) {
-        const revertError = error.walk(err => err instanceof ContractFunctionRevertedError);
-        if (revertError instanceof ContractFunctionRevertedError) {
-          const errorName = revertError.data?.errorName ?? '';
-          return left({ type: "ERROR_CONTRACT", message: errorName });
-        }
-      }
-      return left({ type: "SERVER_ERROR", message: error })
+      const message = error?.response?.data?.message ?? error?.message ?? String(error);
+      return left({ success: false, type: "SERVER_ERROR", message });
     }
   }
 }

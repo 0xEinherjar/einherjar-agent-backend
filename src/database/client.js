@@ -29,4 +29,12 @@ export default class Database {
   async update(collection, query, params) {
     await Database.client.db(this.databaseName).collection(collection).updateOne(query, { $set: params });
   }
+
+  async count(collection, query) {
+    return await Database.client.db(this.databaseName).collection(collection).countDocuments(query);
+  }
+
+  async aggregate(collection, pipeline) {
+    return await Database.client.db(this.databaseName).collection(collection).aggregate(pipeline).toArray();
+  }
 }

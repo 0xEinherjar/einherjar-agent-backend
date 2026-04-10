@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { MongoClient } from "mongodb";
 import { createAgent, tool } from "langchain";
 import { ChatOpenAI } from "@langchain/openai";
@@ -6,15 +8,18 @@ import { z } from "zod";
 import { createERC20Token } from "../tools/create-erc20.js";
 import { transferERC20Token } from "../tools/transfer-erc20.js";
 import { transferERC20TokenToUsername } from "../tools/transfer-erc20-to-username-twitter.js";
-import { transferNative } from "../tools/transfer-native.js";
-import { transferNativeToUsername } from "../tools/transfer-native-to-username-twitter.js";
+import { transferUsdc } from "../tools/transfer-usdc.js";
+import { transferUsdcToUsername } from "../tools/transfer-usdc-to-username-twitter.js";
 import { crosschainTransfer } from "../tools/crosschain-transfer.js";
+import { transferEurc } from "../tools/transfer-eurc.js";
+import { transferEurcToUsername } from "../tools/transfer-eurc-to-username-twitter.js";
 import { constants } from "../shared/constant.js";
 
 const client = new MongoClient(constants.MONGODB_URI);
+const systemPrompt = readFileSync(join(process.cwd(), "src", "prompts", "agent.txt"), "utf-8");
 
 export class Agent {
-  constructor({ systemPrompt }) {
+  constructor() {
     this.model = new ChatOpenAI({ 
       temperature: 0.3, 
       apiKey: constants.LLM_API_KEY,
@@ -25,9 +30,13 @@ export class Agent {
       client,
       dbName: constants.MONGODB_NAME_DATABASE, 
       checkpointCollectionName: "checkpoint", 
-      checkpointWritesCollectionName: "checkpoint_writes"
+      checkpointWritesCollectionName: "checkpoint_writes",
     });
-    const contextSchema = z.object({ twitterAuthorId: z.string() });
+
+    const contextSchema = z.object({
+      authorId: z.string(),
+      channel: z.enum(["twitter", "telegram", "web"]).default("twitter"),
+    });
 
     this.agent = createAgent({
       model: this.model,
@@ -43,9 +52,11 @@ export class Agent {
       createERC20Token,
       transferERC20Token,
       transferERC20TokenToUsername,
-      transferNative,
-      transferNativeToUsername,
-      crosschainTransfer
+      transferUsdc,
+      transferUsdcToUsername,
+      crosschainTransfer,
+      transferEurc,
+      transferEurcToUsername,
     ];
     return toolsRegistry.map(item => tool(item.handle, {
       name: item.name,
@@ -55,12 +66,12 @@ export class Agent {
   }
 
 
-  async run(id, content) {      
+  async run(id, content, channel = "twitter") {      
     const result = await this.agent.invoke(
       { messages: [{ role: "user", content }] },
       { 
         // configurable: { thread_id: id },
-        context: { twitterAuthorId: id }
+        context: { authorId: id, channel }
       },
     );
     return result.messages.at(-1).content;

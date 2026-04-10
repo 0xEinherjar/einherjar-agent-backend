@@ -1,73 +1,71 @@
-import { createWalletClient, http, publicActions, BaseError, ContractFunctionRevertedError, parseEventLogs, formatUnits } from "viem";
-import { arcTestnet } from "viem/chains";
-import { createViemAccount } from "@privy-io/node/viem"
+import { initiateSmartContractPlatformClient } from "@circle-fin/smart-contract-platform";
 import { left, right } from "../../shared/either.js";
-import { abi, contract } from "../../abi/index.js";
+import { abi, bytecode } from "../../abi/index.js";
+import { constants } from "../../shared/constant.js";
+import { recordMetric } from "../../shared/record-metric.js";
+
 
 export default class Service {
-  constructor({ repository, walletProvider }) {
+  constructor({ repository }) {
     this.repository = repository;
-    this.walletProvider = walletProvider;
   }
 
   async execute(input) {
     try {
-      const user = await this.repository.loadOne({ twitterId: input.id });
-      if (!user) return left({ type: "NOT_FOUND", message: "User not found" });
+      const user = await this.repository.loadOne({ userId: input.id });
+      if (!user) return left({ success: false, type: "NOT_FOUND", message: "User not found" });
 
-      const account = await createViemAccount(this.walletProvider.getClient(), {
+      const smartContractPlatformClient = initiateSmartContractPlatformClient({
+        apiKey: constants.CIRCLE_API_KEY,
+        entitySecret: constants.CIRCLE_ENTITY_SECRET,
+      });
+
+      const deployResponse = await smartContractPlatformClient.deployContract({
+        name: "Token ERC20",
+        description: "Standard ERC20 token",
         walletId: user.walletId,
-        address: user.address
+        blockchain: "ARC-TESTNET",
+        constructorParameters: [input.name, input.symbol, input.supply, user.address],
+        fee: { type: "level", config: { feeLevel: "MEDIUM" } },
+        abiJson: JSON.stringify(abi.ERC20),
+        bytecode: `0x${bytecode.ERC20}`,
       });
 
-      const client = createWalletClient({
-        account: account,
-        chain: arcTestnet,
-        transport: http()
-      }).extend(publicActions);
+      const TIMEOUT_MS = 60 * 1000; // 60 seconds
+      const startTime = Date.now();
+      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-      const contractCallParams = {
-        address: contract.ERC20Factory,
-        abi: abi.ERC20Factory,
-        functionName: 'createToken',
-        args: [input.name, input.symbol, input.supply, user.address],
-      };
+      while ((startTime + TIMEOUT_MS) > Date.now()) {
+        await sleep(1000); // await 1 second
+        const transactionStatusResponse = await smartContractPlatformClient.getContract({ id: deployResponse.data.contractId });
+        const { status, contractAddress, txHash } = transactionStatusResponse.data.contract;
 
-      const [balance, gasEstimate, gasPrice] = await Promise.all([
-        client.getBalance({ address: user.address }),
-        client.estimateContractGas({ ...contractCallParams, account }),
-        client.getGasPrice(),
-      ]);
-
-      const estimatedCost = gasEstimate * gasPrice;
-      if (balance < estimatedCost) {
-        return left({
-          type: "INSUFFICIENT_FUNDS",
-          message: `Insufficient balance. Required: ${estimatedCost} wei, Available: ${balance} wei`,
-        });
-      }
-
-      const { request } = await client.simulateContract(contractCallParams);
-
-      const hash = await client.writeContract(request);
-      const receipt = await client.waitForTransactionReceipt({ hash });
-
-      const logs = parseEventLogs({
-        abi: abi.ERC20Factory,
-        eventName: 'ERC20TokenDeployed',
-        logs: receipt.logs,
-      });
-
-      return right(`Token created successfully. Token contract: ${logs[0].args.tokenAddress}. Transaction hash: ${hash}`);
-    } catch (error) {
-      if (error instanceof BaseError) {
-        const revertError = error.walk(err => err instanceof ContractFunctionRevertedError);
-        if (revertError instanceof ContractFunctionRevertedError) {
-          const errorName = revertError.data?.errorName ?? '';
-          return left({ type: "ERROR_CONTRACT", message: errorName });
+        const TERMINAL_STATES = new Set(["COMPLETE", "FAILED", "CANCELLED", "DENIED", "STUCK"]);
+        if (TERMINAL_STATES.has(status) && status == "COMPLETE") {
+          await recordMetric({
+            type: "TOKEN_CREATED",
+            token: null,
+            amount: 0,
+            chain: "ARC-TESTNET",
+            userId: input.id,
+          });
+          return right({
+            success: true,
+            data: { contract: contractAddress, hash: txHash }
+          });
+        }
+        if (TERMINAL_STATES.has(status) && status != "COMPLETE") {
+          return left({
+            success: false,
+            type: "TRANSACTION_FAILED",
+            message: `Deploy failed. Status: ${status}.`,
+          });
         }
       }
-      return left({ type: "SERVER_ERROR", message: error })
+      return left({ success: false, message: "Timeout reached while waiting for transaction completion" });
+    } catch (error) {
+      const message = error?.response?.data?.message ?? error?.message ?? String(error);
+      return left({ success: false, type: "SERVER_ERROR", message });
     }
   }
 }

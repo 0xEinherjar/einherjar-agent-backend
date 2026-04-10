@@ -10,7 +10,13 @@ export const createERC20Token = {
     supply: z.number().default(1000000000).describe("Total number of tokens to be minted, expressed in whole units before applying decimals."),
   }),
   handle: async ({ name, symbol, supply }, runtime) => {
-    const result = await CreateErc20Factory().execute({ id: runtime.context?.twitterAuthorId, name, symbol, supply });
+    const result = await CreateErc20Factory().execute({
+      id: runtime.context?.authorId,
+      channel: runtime.context?.channel,
+      name,
+      symbol,
+      supply
+    });
     if (result.isLeft()) throw new Error(result.value.message);
     return JSON.stringify(result.value);
   }

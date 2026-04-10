@@ -1,12 +1,12 @@
 import { left, right } from "../shared/either.js";
 
 export default class User {
-  constructor({ userId, walletId, address, twitterId, userWalletId }) {
-    this.twitterId = twitterId;
+  constructor({ userId, walletId, address, twitterId, twitterHandle }) {
+    this.twitterId = twitterId ?? null;
+    this.twitterHandle = twitterHandle ?? null;
     this.walletId = walletId;
     this.address = address;
     this.userId = userId ?? null;
-    this.userWalletId = userWalletId ?? null;
   }
 
   static create(props) {
@@ -15,10 +15,9 @@ export default class User {
     return right(new User(props));
   }
 
-  static #validateProps({ walletId, address, twitterId }) {
+  static #validateProps({ walletId, address }) {
     if (!walletId) return "Wallet Id is required.";
     if (!address) return "Address is required.";
-    if (!twitterId) return "Twitter Id is required.";
     return null;
   }
 }

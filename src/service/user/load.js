@@ -13,6 +13,7 @@ export default class Service {
       address: result.address,
       walletId: result.walletId,
       twitterId: result.twitterId,
+      telegramId: result.telegramId,
     });
   }
 }

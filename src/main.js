@@ -10,6 +10,8 @@ import errorHandler from "./middleware/error-handler.js";
 import notFoundHandler from "./middleware/not-found.js";
 import { corsOptions, securityMiddleware, apiRateLimiter } from "./middleware/security.js";
 import userRouter from "./router/user.js";
+import blockchainRouter from "./router/blockchain.js";
+import statsRouter from "./router/stats.js";
 import { startTwitterService } from "./twitter.js";
 
 const app = express();
@@ -23,13 +25,15 @@ app.all("/api/auth/{*any}", toNodeHandler(auth));
 app.use(express.json());
 app.use(apiRateLimiter);
 app.use("/api/user", userRouter);
+app.use("/api/blockchain", blockchainRouter);
+app.use("/api/stats", statsRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
 const server = app.listen(constants.PORT).once("listening", async () => {
   try {
     await database.connect()
-    // startTwitterService();
+    startTwitterService();
     console.log(`Server running on port ${constants.PORT}`);
   } catch (error) {
     console.error("Failed to start server:", error);

@@ -2,21 +2,20 @@ import User from "../entity/user.js";
 
 export default class Repository {
   #database;
-  #collection = "agent_user";
+  #collection = "user_agent";
 
   constructor(database) {
     this.#database = database;
   }
 
-  async create(user) {    
+  async create(user) {
     await this.#database.insert(
       this.#collection,
       {
         userId: user.userId,
         walletId: user.walletId,
         address: user.address,
-        twitterId: user.twitterId,
-        userWalletId: user.userWalletId
+        twitterId: user.twitterId
       }
     );
   }
@@ -28,8 +27,7 @@ export default class Repository {
       userId: user.userId,
       walletId: user.walletId,
       address: user.address,
-      twitterId: user.twitterId,
-      userWalletId: user.userWalletId
+      twitterId: user.twitterId
     }));
   }
 
@@ -40,8 +38,7 @@ export default class Repository {
       userId: user.userId,
       walletId: user.walletId,
       address: user.address,
-      twitterId: user.twitterId,
-      userWalletId: user.userWalletId
+      twitterId: user.twitterId
     })
   }
 

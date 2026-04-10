@@ -1,6 +1,7 @@
 export const httpStatusFromErrorType = (type) => {
   const map = {
     BAD_REQUEST: 400,
+    VALIDATION: 400,
     UNAUTHORIZED: 401,
     FORBIDDEN: 403,
     NOT_FOUND: 404,

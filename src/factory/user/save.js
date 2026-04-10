@@ -1,7 +1,7 @@
 import Database from "../../database/client.js";
 import Repository from "../../database/user-repository.js";
 import Service from "../../service/user/save.js";
-import WalletProvider from "../../lib/wallet-provider.js";
+import WalletProvider from "../../lib/wallet-provider-circle.js";
 
 export const SaveUserFactory = () => {
   const database = new Database();

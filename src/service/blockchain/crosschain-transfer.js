@@ -1,80 +1,68 @@
-import { ArcTestnet, EthereumSepolia, BaseSepolia, OptimismSepolia, AvalancheFuji, PolygonAmoy, ArbitrumSepolia } from "@circle-fin/bridge-kit/chains";
-import { createWalletClient, createPublicClient, http } from "viem";
-import { createViemAccount } from "@privy-io/node/viem";
-import { ViemAdapter } from "@circle-fin/adapter-viem-v2";
 import { BridgeKit } from "@circle-fin/bridge-kit";
+import { AppKit } from "@circle-fin/app-kit";
+import { createCircleWalletsAdapter } from "@circle-fin/adapter-circle-wallets";
 import { left, right } from "../../shared/either.js";
+import { constants } from "../../shared/constant.js";
 import { resolveChain } from "../../shared/resolve-chain.js";
+import { recordMetric } from "../../shared/record-metric.js";
+
+const adapter = createCircleWalletsAdapter({
+  apiKey: constants.CIRCLE_API_KEY,
+  entitySecret: constants.CIRCLE_ENTITY_SECRET,
+});
+
+const kit = new AppKit();
 
 export default class Service {
-  constructor({ repository, walletProvider }) {
+  constructor({ repository }) {
     this.repository = repository;
-    this.walletProvider = walletProvider;
   }
 
   async execute(input) {
-    const user = await this.repository.loadOne({ twitterId: input.id });
-    if (!user) return left({ type: "NOT_FOUND", message: "User not found" });
+    try {
+      const user = await this.repository.loadOne({ userId: input.id });
+      if (!user) return left({ success: false, type: "NOT_FOUND", message: "User not found" });
 
-    const fromChain = resolveChain(input.fromChain).canonical;
-    const toChain = resolveChain(input.toChain).canonical;
+      const fromChain = resolveChain(input.fromChain);
+      const toChain = resolveChain(input.toChain);
 
-    if (!fromChain || !toChain) {
-      return left({ type: "INVALID_CHAIN", message: "Unsupported or unknown blockchain network" })
-    }
+      if (!fromChain || !toChain) {
+        return left({ success: false, type: "INVALID_CHAIN", message: "Unsupported or unknown blockchain network" });
+      }
 
-    const account = await createViemAccount(this.walletProvider.getClient(), {
-      walletId: user.walletId,
-      address: user.address
-    });
-    
-    const supportedChains = [ArcTestnet, EthereumSepolia, BaseSepolia, OptimismSepolia, AvalancheFuji, PolygonAmoy, ArbitrumSepolia];
+      const result = await kit.bridge({
+        from: { adapter, chain: fromChain.canonical_bridge, address: user.address },
+        to: { adapter, chain: toChain.canonical_bridge, address: user.address },
+        amount: String(input.value),
+        token: "USDC"
+      });
 
-    const fromAdapter = new ViemAdapter({
-      getPublicClient: ({ chain }) => createPublicClient({
-        chain,
-        transport: http(),
-      }),
-      getWalletClient: ({ chain }) => createWalletClient({
-        chain,
-        account,
-        transport: http(),
-      })
-    }, 
-    {
-      addressContext: "user-controlled",
-      supportedChains: supportedChains,
-    });
+      if (result.state === "success") {
+        const explorerUrl = result.steps.at(-1)?.explorerUrl ?? "";
 
-    const toAdapter = new ViemAdapter({
-      getPublicClient: ({ chain }) => createPublicClient({
-        chain,
-        transport: http(),
-      }),
-      getWalletClient: ({ chain }) => createWalletClient({
-        chain,
-        transport: http(),
-        account,
-      }),
-    },
-    {
-      addressContext: "user-controlled",
-      supportedChains: supportedChains,
-    });
+        await recordMetric({
+          type: "TRANSACTION",
+          token: "USDC",
+          amount: Number(input.value),
+          chain: `${fromChain.canonical_bridge} -> ${toChain.canonical_bridge}`,
+          userId: input.id,
+        });
 
-    const kit = new BridgeKit()
-    const result = await kit.bridge({
-      from: { adapter: fromAdapter, chain: fromChain },
-      to: { adapter: toAdapter, chain: toChain },
-      amount: input.value,
-    })
+        return right({
+          success: true,
+          message: `Bridge of ${input.value} USDC from ${fromChain.canonical_bridge} to ${toChain.canonical_bridge} completed successfully. ${explorerUrl}`
+        });
+      }
 
-    if (result.state === "success") {
-      return right(`Bridge completed successfully. ${result.steps.at(-1).explorerUrl}`)
-    } else {
-      const failedStep = result.steps.find((s) => s.state === "error")
-      return left(`Bridge failed: ${failedStep.name}`)
+      const failedStep = result.steps.find((s) => s.state === "error");
+      return left({
+        success: false,
+        type: "BRIDGE_FAILED",
+        message: `Bridge failed on step: ${failedStep?.name ?? "unknown"}`,
+      });
+    } catch (error) {
+      const message = error?.response?.data?.message ?? error?.message ?? String(error);
+      return left({ success: false, type: "SERVER_ERROR", message });
     }
   }
-
 }

@@ -11,7 +11,13 @@ export const crosschainTransfer = {
     value: z.string().describe("Amount of USDC to be transferred."),
   }),
   handle: async ({ fromChain, toChain, value }, runtime) => {
-    const result = await CrosschainTransferFactory().execute({ id: runtime.context?.twitterAuthorId, fromChain, toChain, value });
+    const result = await CrosschainTransferFactory().execute({
+      id: runtime.context?.authorId,
+      channel: runtime.context?.channel,
+      fromChain,
+      toChain,
+      value
+    });
     if (result.isLeft()) throw new Error(result.value.message);
     return JSON.stringify(result.value);
   }

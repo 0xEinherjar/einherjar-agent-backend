@@ -1,8 +1,8 @@
 import Database from "../../database/client.js";
 import Repository from "../../database/user-repository.js";
-import Service from "../../service/blockchain/transfer-erc20.js";
+import Service from "../../service/blockchain/transfer-stablecoin.js";
 
-export const TransferErc20Factory = () => {
+export const TransferStablecoinFactory = () => {
   const database = new Database();
   const repository = new Repository(database);
   const service = new Service({ repository });

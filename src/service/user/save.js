@@ -9,8 +9,8 @@ export default class Service {
 
   async execute(input) {
     let result = await this.repository.loadOne({ twitterId: input.accountId });
-    
-    if (result) {      
+
+    if (result) {
       if (!result.userId) {
         result.userId = input.userId;
         await this.repository.update(result);
@@ -23,15 +23,14 @@ export default class Service {
       });
     }
 
-    const wallet = await this.walletProvider.createWallet(null);
+    const wallet = await this.walletProvider.createWallet();
     const created = User.create({
       userId: input.userId,
       twitterId: input.accountId,
       walletId: wallet.id,
       address: wallet.address,
-      userWalletId: wallet.userWalletId,
-    });    
-    if (created.isLeft()) return left({ type: "BAD_REQUEST", message: created.value });
+    });
+    if (created.isLeft()) return left({ success: false, type: "BAD_REQUEST", message: created.value });
     const user = created.value;
     await this.repository.create(user);
     return right({

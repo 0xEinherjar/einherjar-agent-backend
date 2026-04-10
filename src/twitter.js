@@ -1,17 +1,13 @@
 import "dotenv/config";
-
 import { Agent } from "./lib/agent.js";
 import logger from "./lib/logger.js";
 import { LoadUserFactory } from "./factory/user/load.js";
 import TwitterClient from "./lib/x-client.js";
-import { readFileSync } from "fs";
-import { join } from "path";
 
-const systemPrompt = readFileSync(join(process.cwd(), "src", "prompts", "agent.txt"), "utf-8");
 let agent = null;
 
 try {
-  agent = new Agent({ systemPrompt });
+  agent = new Agent();
   logger.info('Twitter agent initialized successfully');
 } catch (error) {
   logger.error('Failed to initialize Twitter agent', { error: error.message, stack: error.stack });
@@ -26,9 +22,9 @@ async function checkMentions() {
     await Promise.all(mentions.map(async (tweet) => {
       try {
         console.log(tweet.id, tweet.text);
-        const result = await LoadUserFactory().execute({ twitterId: tweet.authorId });
-        if (result.isLeft()) return;
-        const response = await agent.run(tweet.authorId, tweet.text);
+        const user = await LoadUserFactory().execute({ twitterId: tweet.authorId });
+        if (user.isLeft()) return;
+        const response = await agent.run(user.value.userId, tweet.text, "twitter");
         let responseText = typeof response === 'string' ? response : String(response);
         if (responseText.length > 280) responseText = responseText.substring(0, 277) + '...';
         await twitterClient.reply(responseText, tweet.id);
