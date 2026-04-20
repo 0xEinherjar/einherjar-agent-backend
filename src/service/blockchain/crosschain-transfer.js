@@ -1,4 +1,3 @@
-import { BridgeKit } from "@circle-fin/bridge-kit";
 import { AppKit } from "@circle-fin/app-kit";
 import { createCircleWalletsAdapter } from "@circle-fin/adapter-circle-wallets";
 import { left, right } from "../../shared/either.js";

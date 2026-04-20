@@ -14,6 +14,7 @@ const envSchema = z.object({
   TWITTER_ACCESS_SECRET: z.string().min(1, "TWITTER_ACCESS_SECRET is required"),
   LLM_API_KEY: z.string().min(1, "LLM_API_KEY is required"),
   LLM_MODEL: z.string().min(1, "LLM_MODEL is required"),
+  CIRCLE_KIT_KEY: z.string().min(1, "CIRCLE_KIT_KEY is required"),
   CIRCLE_API_KEY: z.string().min(1, "CIRCLE_API_KEY is required"),
   CIRCLE_ENTITY_SECRET: z.string().min(1, "CIRCLE_ENTITY_SECRET is required"),
   CIRCLE_WALLET_SET_ID: z.string().min(1, "CIRCLE_WALLET_SET_ID is required"),
@@ -21,7 +22,7 @@ const envSchema = z.object({
   PRIVY_APP_SECRET: z.string().min(1, "PRIVY_APP_SECRET is required"),
   BETTER_AUTH_URL: z.string().url("BETTER_AUTH_URL must be a valid URL"),
   FRONTEND_URL: z.string().url("FRONTEND_URL must be a valid URL"),
-  
+
   TELEGRAM_BOT_TOKEN: z.string().optional(),
 });
 
