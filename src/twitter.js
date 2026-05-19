@@ -21,11 +21,14 @@ async function checkMentions() {
     if (!mentions || mentions.length === 0) return;
     await Promise.all(mentions.map(async (tweet) => {
       try {
-        console.log(tweet.id, tweet.text);
+        // console.log(tweet.id, tweet.text);
         const user = await LoadUserFactory().execute({ twitterId: tweet.authorId });
         if (user.isLeft()) return;
         const response = await agent.run(user.value.userId, tweet.text, "twitter");
-        let responseText = typeof response === 'string' ? response : String(response);
+        console.log(response);
+        
+        if (response.ignored) return;
+        let responseText = response.content;
         if (responseText.length > 280) responseText = responseText.substring(0, 277) + '...';
         await twitterClient.reply(responseText, tweet.id);
       } catch (error) {

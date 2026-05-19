@@ -1,0 +1,28 @@
+2026-05-19 15:02:25 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:12:24 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:18:09 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:36:43 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}

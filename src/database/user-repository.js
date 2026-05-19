@@ -15,7 +15,8 @@ export default class Repository {
         userId: user.userId,
         walletId: user.walletId,
         address: user.address,
-        twitterId: user.twitterId
+        twitterId: user.twitterId,
+        gmailAddress: user.gmailAddress,
       }
     );
   }
@@ -27,7 +28,8 @@ export default class Repository {
       userId: user.userId,
       walletId: user.walletId,
       address: user.address,
-      twitterId: user.twitterId
+      twitterId: user.twitterId,
+      gmailAddress: user.gmailAddress,
     }));
   }
 
@@ -38,7 +40,8 @@ export default class Repository {
       userId: user.userId,
       walletId: user.walletId,
       address: user.address,
-      twitterId: user.twitterId
+      twitterId: user.twitterId,
+      gmailAddress: user.gmailAddress,
     })
   }
 
@@ -51,6 +54,7 @@ export default class Repository {
         walletId: user.walletId,
         address: user.address,
         twitterId: user.twitterId,
+        gmailAddress: user.gmailAddress,
       }
     );
   }

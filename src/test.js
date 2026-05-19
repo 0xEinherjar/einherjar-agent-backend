@@ -14,8 +14,8 @@ const database = new Database();
 await database.connect();
 
 try {
-  // const agent = new Agent();
-  // const result = await agent.run("69d85122f12c4b87209988cf", "Envie 0.1 eurc para o endereço 0x3c50ac574F85Ae158e76fc478249Aea49c45622a", "twitter");
+  const agent = new Agent();
+  const result = await agent.run("69d85122f12c4b87209988cf", "Envie 0.1 usdc para o endereço 0x3c50ac574F85Ae158e76fc478249Aea49c45622a", "web");
   
   // const result = await CreateErc20Factory().execute({
   //   id: "69d85122f12c4b87209988cf",
@@ -68,12 +68,12 @@ try {
   //   toChain: "eth"
   // })
 
-  const result = await SwapFactory().execute({
-    id: "69d85122f12c4b87209988cf",
-    value: "0.1",
-    tokenIn: "USDC",
-    tokenOut: "EURC"
-  })
+  // const result = await SwapFactory().execute({
+  //   id: "69d85122f12c4b87209988cf",
+  //   value: "0.1",
+  //   tokenIn: "USDC",
+  //   tokenOut: "EURC"
+  // })
 
   // @EinherjarAgent send 1 usdc to @rackermoonn
   console.log(result);

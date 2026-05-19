@@ -18,6 +18,6 @@ export default class AgentChatService {
     }
 
     const response = await this.agent.run(input.userId, input.message.trim(), "web");
-    return right({ response });
+    return right({ response: response.content });
   }
 }

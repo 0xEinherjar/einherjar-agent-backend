@@ -179,3 +179,151 @@
 2026-03-09 00:42:51 [info]: Twitter agent initialized successfully
 2026-03-09 00:43:12 [info]: Twitter agent initialized successfully
 2026-03-09 23:48:15 [info]: Twitter agent initialized successfully
+2026-05-14 21:42:48 [info]: Twitter agent initialized successfully
+2026-05-14 21:42:52 [info]: Twitter agent initialized successfully
+2026-05-14 21:47:47 [http]: GET /api/stats 200 101 - 204.371 ms
+2026-05-14 21:47:55 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 0.384 ms
+2026-05-14 21:47:55 [http]: POST /api/auth/sign-in/social 200 - - 55.205 ms
+2026-05-14 21:48:09 [http]: GET /api/auth/callback/twitter?state=fW65uxMhZUV1quV33ZsrPkx8HwLrlAlq&code=QzFKYS16ZDM2cmpNelJRYXc5dFhONDhsWnkxVDVicks2Z3RzZGUzWjg3OTZ5OjE3Nzg4MDYwNzkzMDU6MTowOmFjOjE 302 - - 1473.584 ms
+2026-05-14 21:48:10 [http]: GET /api/user 200 283 - 26.763 ms
+2026-05-14 22:12:52 [http]: GET /api/user 304 - - 23.766 ms
+2026-05-14 22:20:28 [http]: GET /api/user 304 - - 18.958 ms
+2026-05-14 22:21:20 [http]: GET /api/auth/list-accounts 200 - - 22.756 ms
+2026-05-15 01:35:50 [http]: OPTIONS /api/auth/link-social 204 0 - 1.076 ms
+2026-05-15 01:35:50 [http]: POST /api/auth/link-social 200 - - 47.267 ms
+2026-05-15 01:36:04 [http]: GET /api/auth/callback/google?state=RK4KgzhsiXG6mdFSE8p0_JTwn9vO8UFp&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AeoWuM9ufhCgFwdjfGP-Ps9pcOu2St2vQYj6R-ciApDqMVANOuwWc5449lS7Cy5JWk4O9w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=1&prompt=consent 302 - - 529.561 ms
+2026-05-15 01:36:04 [http]: GET /api/auth/error?error=email_doesn%27t_match 200 - - 5.893 ms
+2026-05-15 01:36:05 [http]: GET /favicon.ico 404 64 - 1.484 ms
+2026-05-15 01:36:37 [http]: GET /api/auth/list-accounts 200 - - 22.541 ms
+2026-05-15 01:40:00 [info]: Twitter agent initialized successfully
+2026-05-15 01:40:04 [info]: Twitter agent initialized successfully
+2026-05-15 01:41:03 [info]: Twitter agent initialized successfully
+2026-05-15 01:41:10 [http]: OPTIONS /api/auth/link-social 204 0 - 1.587 ms
+2026-05-15 01:41:10 [http]: POST /api/auth/link-social 200 - - 55.484 ms
+2026-05-15 01:42:19 [http]: GET /api/auth/callback/google?state=_e5r1tObQ-xpQ4mahdSyaTcTi8oVdvzh&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AeoWuM-X_WaOMTzYhzluEWBFi4q2mnYJG4-c2iulAJMchFM0BTmMWLBF0G0pto91BJJn4w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=consent 302 - - 1706.679 ms
+2026-05-15 01:42:19 [http]: GET /binding 404 60 - 4.543 ms
+2026-05-15 01:43:40 [http]: GET /api/auth/list-accounts 200 - - 24.619 ms
+2026-05-15 01:43:47 [http]: GET /api/user 304 - - 21.088 ms
+2026-05-16 00:29:50 [info]: Twitter agent initialized successfully
+2026-05-16 00:29:54 [info]: Twitter agent initialized successfully
+2026-05-16 00:30:45 [http]: GET /api/user 200 303 - 60.772 ms
+2026-05-16 00:30:54 [http]: GET /api/auth/list-accounts 200 - - 38.010 ms
+2026-05-16 00:31:16 [info]: Twitter agent initialized successfully
+2026-05-16 00:31:20 [info]: Twitter agent initialized successfully
+2026-05-16 00:31:34 [http]: OPTIONS /api/auth/link-social 204 0 - 1.754 ms
+2026-05-16 00:31:34 [http]: POST /api/auth/link-social 200 - - 59.257 ms
+2026-05-16 00:31:40 [http]: GET /api/auth/callback/google?state=JLdxK3wdKuTsPSX1UP1Gd9KQscU7D0Io&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AeoWuM9aGgYrnkU1IFWE7ZVkAwKAy25Zqmt1mRHscXpd5ryEEW-d-6VoTgo0Fmf0cP28Sg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=2&prompt=none 302 - - 793.957 ms
+2026-05-16 00:31:41 [http]: GET /api/auth/list-accounts 200 - - 31.336 ms
+2026-05-16 00:37:28 [info]: Twitter agent initialized successfully
+2026-05-16 02:27:49 [http]: GET /api/user 200 323 - 66.228 ms
+2026-05-16 16:15:05 [info]: Twitter agent initialized successfully
+2026-05-16 16:15:05 [http]: OPTIONS /api/auth/sign-out 204 0 - 1.759 ms
+2026-05-16 16:15:09 [info]: Twitter agent initialized successfully
+2026-05-16 16:15:12 [http]: GET /api/stats 200 101 - 168.966 ms
+2026-05-16 16:15:14 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 0.321 ms
+2026-05-16 16:15:14 [http]: POST /api/auth/sign-in/social 200 - - 45.088 ms
+2026-05-16 16:15:20 [http]: GET /api/auth/callback/twitter?state=6NNvLuhxqusvjtWrWguOwP0GB7FHPYyQ&code=c1hxWkxtUHJLMjJrcXVlT1ZfNVEtT0FrRVpSWFNVcVVIT1JQVnVVRjI2N2UxOjE3Nzg5NTg5MTY3NDM6MTowOmFjOjE 302 - - 1434.501 ms
+2026-05-16 16:15:21 [http]: GET /api/user 200 323 - 32.741 ms
+2026-05-16 16:15:37 [http]: GET /api/auth/list-accounts 200 - - 27.071 ms
+2026-05-16 16:16:22 [http]: GET /api/auth/list-accounts 200 - - 27.587 ms
+2026-05-16 16:16:58 [http]: OPTIONS /api/auth/link-social 204 0 - 0.155 ms
+2026-05-16 16:16:58 [http]: POST /api/auth/link-social 200 - - 26.017 ms
+2026-05-16 16:17:03 [http]: GET /api/auth/callback/google?state=IoyOUm0tUUmGr86pmBG19PvT1pH1QaFW&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AeoWuM9eK_lAzy4uBL5otslkjPEwqDHU5s_enz75oS0WQsx0RQeaBOJOMqg8HObjnaZ1cQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=none 302 - - 540.149 ms
+2026-05-16 16:17:04 [http]: GET /api/auth/list-accounts 200 - - 21.407 ms
+2026-05-16 16:18:25 [http]: GET /api/auth/list-accounts 200 - - 23.074 ms
+2026-05-16 16:18:27 [http]: OPTIONS /api/auth/link-social 204 0 - 0.207 ms
+2026-05-16 16:18:27 [http]: POST /api/auth/link-social 200 - - 24.129 ms
+2026-05-16 16:18:32 [http]: GET /api/auth/callback/google?state=2637rqAzSpx5VA9tf0Zdr8_aB6jCd06p&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AeoWuM9UN6SbEqjhZCHtzI4Q2D0X80BQNOR6T9atc7zxvdlZvhdLkN2QeZ-lijyOijdmhQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=2&prompt=none 302 - - 547.348 ms
+2026-05-16 16:18:33 [http]: GET /api/auth/list-accounts 200 - - 20.270 ms
+2026-05-16 16:55:29 [info]: Twitter agent initialized successfully
+2026-05-16 16:55:57 [info]: Twitter agent initialized successfully
+2026-05-16 16:56:13 [http]: GET /api/auth/list-accounts 200 - - 38.265 ms
+2026-05-16 17:05:50 [http]: OPTIONS /api/auth/unlink-account 204 0 - 0.570 ms
+2026-05-16 17:05:50 [http]: POST /api/auth/unlink-account 200 - - 105.969 ms
+2026-05-16 17:05:50 [http]: GET /api/auth/list-accounts 200 - - 21.802 ms
+2026-05-16 17:07:57 [http]: GET /api/user 200 303 - 24.492 ms
+2026-05-16 17:08:00 [http]: GET /api/user 304 - - 21.426 ms
+2026-05-16 17:08:16 [http]: GET /api/auth/list-accounts 200 - - 25.537 ms
+2026-05-16 17:17:47 [http]: GET /api/user 304 - - 21.484 ms
+2026-05-16 17:18:13 [http]: GET /api/auth/list-accounts 200 - - 25.477 ms
+2026-05-16 19:36:33 [http]: GET /api/auth/list-accounts 200 - - 45.882 ms
+2026-05-17 01:22:49 [http]: OPTIONS /api/auth/sign-out 204 0 - 1.604 ms
+2026-05-17 01:22:49 [http]: GET /api/stats 200 101 - 364.567 ms
+2026-05-17 01:22:49 [http]: POST /api/auth/sign-out 200 - - 404.837 ms
+2026-05-17 01:30:55 [info]: Twitter agent initialized successfully
+2026-05-17 01:30:59 [info]: Twitter agent initialized successfully
+2026-05-17 01:31:49 [http]: GET /api/stats 304 - - 211.926 ms
+2026-05-17 01:31:50 [http]: GET /api/stats 304 - - 102.966 ms
+2026-05-17 01:32:10 [http]: GET /api/stats 304 - - 120.834 ms
+2026-05-17 01:32:36 [http]: GET /api/stats 304 - - 110.229 ms
+2026-05-17 01:35:24 [http]: GET /api/stats 304 - - 105.729 ms
+2026-05-17 01:37:45 [http]: GET /api/stats 200 101 - 126.637 ms
+2026-05-17 01:50:18 [http]: GET /api/stats 304 - - 110.736 ms
+2026-05-17 01:50:26 [http]: GET /api/stats 304 - - 110.890 ms
+2026-05-17 01:51:23 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 0.412 ms
+2026-05-17 01:51:23 [http]: POST /api/auth/sign-in/social 200 - - 48.491 ms
+2026-05-17 01:51:34 [http]: GET /api/stats 304 - - 118.709 ms
+2026-05-17 01:51:37 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 0.201 ms
+2026-05-17 01:51:37 [http]: POST /api/auth/sign-in/social 200 - - 29.077 ms
+2026-05-19 13:37:59 [info]: Twitter agent initialized successfully
+2026-05-19 13:38:03 [info]: Twitter agent initialized successfully
+2026-05-19 13:38:04 [info]: Starting Twitter mention monitoring service
+2026-05-19 13:39:46 [info]: Twitter agent initialized successfully
+2026-05-19 13:39:47 [info]: Starting Twitter mention monitoring service
+2026-05-19 13:40:06 [info]: Twitter agent initialized successfully
+2026-05-19 13:40:06 [info]: Starting Twitter mention monitoring service
+2026-05-19 13:40:38 [info]: Twitter agent initialized successfully
+2026-05-19 13:40:39 [info]: Starting Twitter mention monitoring service
+2026-05-19 13:41:47 [info]: Twitter agent initialized successfully
+2026-05-19 13:41:52 [info]: Twitter agent initialized successfully
+2026-05-19 13:41:56 [info]: Twitter agent initialized successfully
+2026-05-19 14:44:41 [info]: Twitter agent initialized successfully
+2026-05-19 14:44:45 [info]: Twitter agent initialized successfully
+2026-05-19 14:55:14 [http]: GET /api/stats 200 101 - 211.361 ms
+2026-05-19 14:55:53 [http]: OPTIONS /api/auth/sign-in/social 204 0 - 0.498 ms
+2026-05-19 14:55:53 [http]: POST /api/auth/sign-in/social 200 - - 64.809 ms
+2026-05-19 14:55:59 [http]: GET /api/auth/callback/twitter?state=3L9bMJ29xK7DHU854n4ybXj0Atl0IHy1&code=Zm9Tc2phVFVnaHZkbEo4UlhvSmRlbWNEOE10ZklpY1J5cGdEWEgwekx0MWJPOjE3NzkyMTMzNTY0NzY6MToxOmFjOjE 302 - - 1480.936 ms
+2026-05-19 14:55:59 [http]: GET /api/user 200 303 - 28.102 ms
+2026-05-19 15:02:12 [info]: Twitter agent initialized successfully
+2026-05-19 15:02:12 [info]: Starting Twitter mention monitoring service
+2026-05-19 15:02:25 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:12:12 [info]: Twitter agent initialized successfully
+2026-05-19 15:12:12 [info]: Starting Twitter mention monitoring service
+2026-05-19 15:12:24 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:17:56 [info]: Twitter agent initialized successfully
+2026-05-19 15:17:56 [info]: Starting Twitter mention monitoring service
+2026-05-19 15:18:09 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:36:31 [info]: Twitter agent initialized successfully
+2026-05-19 15:36:31 [info]: Starting Twitter mention monitoring service
+2026-05-19 15:36:43 [error]: GraphRecursionError: Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the "recursionLimit" config key.
+
+Troubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/
+
+    at CompiledStateGraph._runLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1202:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async createAndRunLoop (file:///C:/Users/Einherjar/Desktop/einherjar-agent-backend/node_modules/@langchain/langgraph/dist/pregel/index.js:1086:5) {"error":"Recursion limit of 2 reached without hitting a stop condition. You can increase the limit by setting the \"recursionLimit\" config key.\n\nTroubleshooting URL: https://docs.langchain.com/oss/javascript/langgraph/GRAPH_RECURSION_LIMIT/\n","tweetId":"2056797481657135536","authorId":"1395762489862901764"}
+2026-05-19 15:39:43 [info]: Twitter agent initialized successfully
+2026-05-19 15:40:09 [info]: Twitter agent initialized successfully
+2026-05-19 15:42:18 [info]: Twitter agent initialized successfully
+2026-05-19 15:42:18 [info]: Starting Twitter mention monitoring service
+2026-05-19 15:50:05 [info]: Twitter agent initialized successfully
+2026-05-19 15:50:09 [info]: Twitter agent initialized successfully
+2026-05-19 15:50:09 [info]: Starting Twitter mention monitoring service

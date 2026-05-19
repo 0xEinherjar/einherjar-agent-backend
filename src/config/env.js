@@ -22,8 +22,9 @@ const envSchema = z.object({
   PRIVY_APP_SECRET: z.string().min(1, "PRIVY_APP_SECRET is required"),
   BETTER_AUTH_URL: z.string().url("BETTER_AUTH_URL must be a valid URL"),
   FRONTEND_URL: z.string().url("FRONTEND_URL must be a valid URL"),
-
-  TELEGRAM_BOT_TOKEN: z.string().optional(),
+  GOOGLE_CLIENT_ID: z.string().min(1, "GOOGLE_CLIENT_ID is required"),
+  GOOGLE_CLIENT_SECRET: z.string().min(1, "GOOGLE_CLIENT_SECRET is required"),
+  RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY is required"),
 });
 
 export function validateEnv() {

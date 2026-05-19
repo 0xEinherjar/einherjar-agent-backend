@@ -6,6 +6,7 @@ import User from "../../entity/user.js";
 import { abi } from "../../abi/index.js";
 import { waitForTxCompletion } from "./helpers.js";
 import { recordMetric } from "../../shared/record-metric.js";
+import { buildTransferReceiptDM } from "../../templates/dms/transferReceipt.js";
 
 const client = initiateDeveloperControlledWalletsClient({
   apiKey: constants.CIRCLE_API_KEY,
@@ -88,17 +89,36 @@ export default class Service {
       });
       const txResult = await waitForTxCompletion(client, transaction.data?.id);
 
-      if (txResult.isRight()) {
-        await recordMetric({
-          type: "TRANSACTION",
-          token: "ERC20",
-          amount: Number(input.value),
-          chain: "ARC-TESTNET",
-          userId: input.id,
-        });
-      }
+      if (txResult.isLeft()) return txResult;
+      
+      await recordMetric({
+        type: "TRANSACTION",
+        token: "ERC20",
+        amount: Number(input.value),
+        chain: "ARC-TESTNET",
+        userId: input.id,
+      });
 
-      return txResult;
+      const dmContent = buildTransferReceiptDM({
+        senderName: user.twitterUsername || user.name || "Einherjar User",
+        amount: input.value,
+        tokenSymbol: input.token,
+        network: "ARC-TESTNET",
+        txHash: txResult.value,
+      });
+
+      // Fire and forget so we don't block
+      this.xClient.sendDmByUsername(userX.id, dmContent).catch(err => console.error("DM sending failed:", err));
+
+      return right({
+        success: true,
+        data: {
+          chain: "ARC-TESTNET",
+          hash: txResult.value,
+          value: input.value,
+          token: input.token
+        },
+      });
     } catch (error) {
       const message = error?.response?.data?.message ?? error?.message ?? String(error);
       return left({ success: false, type: "SERVER_ERROR", message });

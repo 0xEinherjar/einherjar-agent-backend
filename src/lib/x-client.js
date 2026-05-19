@@ -3,7 +3,7 @@ import { Client, OAuth1 } from '@xdevplatform/xdk';
 
 export default class XClient {
   // static sinceId = null;
-  static sinceId = "2042435633952505922";
+  static sinceId = "2053699584745222418";
 
   constructor() {
     const oauth1 = new OAuth1({
@@ -49,5 +49,9 @@ export default class XClient {
     if (!mentions.data?.length) return null;
     XClient.sinceId = mentions.meta?.newestId ?? XClient.sinceId;
     return mentions.data;
+  }
+
+  async sendDmByUsername(userId, text) {
+    await this.client.directMessages.createByParticipantId(userId, { body: { text: text } });
   }
 }

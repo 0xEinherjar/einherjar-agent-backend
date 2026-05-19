@@ -73,7 +73,7 @@ export default class Service {
             token: input.token,
             userId: input.id,
           });
-  
+
           if (bridgeResult.isLeft()) return bridgeResult;
         } else {
           return left({

@@ -1,9 +1,10 @@
 import { left, right } from "../shared/either.js";
 
 export default class User {
-  constructor({ userId, walletId, address, twitterId, twitterHandle }) {
+  constructor({ userId, walletId, address, twitterId, twitterHandle, gmailAddress }) {
     this.twitterId = twitterId ?? null;
     this.twitterHandle = twitterHandle ?? null;
+    this.gmailAddress = gmailAddress ?? null;
     this.walletId = walletId;
     this.address = address;
     this.userId = userId ?? null;

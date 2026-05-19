@@ -12,7 +12,8 @@ import User from "../../entity/user.js";
 import { abi } from "../../abi/index.js";
 import { waitForTxCompletion } from "./helpers.js";
 import { recordMetric } from "../../shared/record-metric.js";
-import { buildTransferReceiptDM } from "../../templates/dms/transferReceipt.js";
+import { sendEmail } from "../../lib/resend.js";
+import { buildTransferReceiptEmail } from "../../templates/emails/transferReceipt.js";
 
 const client = initiateDeveloperControlledWalletsClient({
   apiKey: constants.CIRCLE_API_KEY,
@@ -25,29 +26,28 @@ const smartContractPlatformClient = initiateSmartContractPlatformClient({
 });
 
 export default class Service {
-  constructor({ repository, walletProvider, xClient }) {
+  constructor({ repository, walletProvider }) {
     this.repository = repository;
     this.walletProvider = walletProvider;
-    this.xClient = xClient;
   }
 
   async execute(input) {
     try {
-      if (input.channel !== "twitter") return left({ success: false, type: "BAD_REQUEST", message: "Invalid channel" });
+      const to = input.to.toLowerCase();
+      if (!to.endsWith("@gmail.com")) {
+        return left({ success: false, type: "BAD_REQUEST", message: "Recipient must be a valid @gmail.com address" });
+      }
+
       const user = await this.repository.loadOne({ userId: input.id });
       if (!user) return left({ success: false, type: "NOT_FOUND", message: "User not found" });
 
-      const username = input.to.replace("@", "");
-      const userX = await this.xClient.findUserByUsername(username);
-      if (!userX) return left({ success: false, type: "NOT_FOUND", message: "User not found on X (twitter)" });
-
-      let recipient = await this.repository.loadOne({ twitterId: userX.id });
+      let recipient = await this.repository.loadOne({ gmailAddress: to });
       if (!recipient) {
         const wallet = await this.walletProvider.createWallet();
         const created = User.create({
           walletId: wallet.id,
           address: wallet.address,
-          twitterId: userX.id,
+          gmailAddress: to,
         });
         if (created.isLeft()) return left({ success: false, type: "BAD_REQUEST", message: created.value });
         recipient = created.value;
@@ -65,7 +65,6 @@ export default class Service {
       } else {
         return left({ success: false, type: "INVALID_TOKEN", message: "Invalid token" });
       }
-
 
       const { decimals, balance } = await this._getTokenBalance(
         resolvedChain,
@@ -118,16 +117,21 @@ export default class Service {
         userId: input.id,
       });
 
-      const dmContent = buildTransferReceiptDM({
-        senderName: user.twitterUsername || user.name || "Einherjar User",
+      const htmlContent = buildTransferReceiptEmail({
+        senderName: user.gmailAddress || user.twitterUsername || "Einherjar User",
         amount: input.value,
         tokenSymbol: input.token,
         network: resolvedChain.canonical_circle,
         txHash: result.value,
       });
 
-      // Fire and forget so we don't block
-      this.xClient.sendDmByUsername(userX.id, dmContent).catch(err => console.error("DM sending failed:", err));
+      // Fire and forget email sending
+      sendEmail({
+        to: to,
+        subject: `You received ${input.value} ${input.token}! 🚀`,
+        html: htmlContent,
+      }).catch(err => console.error("Email sending failed:", err));
+
 
       return right({
         success: true,
