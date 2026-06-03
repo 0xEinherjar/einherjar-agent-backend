@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransferStablecoinToGmailFactory } from "../factory/blockchain/transfer-stablecoin-to-gmail.js";
+import { TransferStablecoinToGmailFactory } from "../factories/transfers/stablecoin-to-gmail.js";
 
 export const transferUsdcToGmail = {
   name: "transferUsdcToGmail",

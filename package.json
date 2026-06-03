@@ -28,10 +28,14 @@
     "langchain": "^1.4.0",
     "mongodb": "^6.12.0",
     "morgan": "^1.10.1",
+    "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.67.0",
     "resend": "^6.12.3",
     "viem": "^2.44.4",
     "winston": "^3.19.0",
     "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.16"
   }
 }

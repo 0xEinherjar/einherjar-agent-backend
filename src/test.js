@@ -1,21 +1,23 @@
 import 'dotenv/config';
-import { Agent } from './lib/agent.js';
-import Database from "./database/client.js";
-import { CreateErc20Factory } from "./factory/blockchain/create-erc20.js";
-import { TransferStablecoinToUsernameTwitterFactory} from "./factory/blockchain/transfer-stablecoin-to-username-twitter.js";
-import { TransferStablecoinFactory } from "./factory/blockchain/transfer-stablecoin.js";
-import { TransferErc20ToUsernameTwitterFactory } from "./factory/blockchain/transfer-erc20-to-username-twitter.js";
-import { TransferErc20Factory } from "./factory/blockchain/transfer-erc20.js";
-import { WithdrawFactory } from "./factory/user/withdraw.js";
-import { CrosschainTransferFactory } from "./factory/blockchain/crosschain-transfer.js";
-import { SwapFactory } from "./factory/blockchain/swap.js";
+import { Agent } from './libraries/agent.js';
+import { MongoDatabase } from "./database/mongodb.js";
+import { CreateErc20Factory } from "./factories/blockchain/create-erc20.js";
+import { TransferStablecoinToUsernameTwitterFactory} from "./factories/transfers/stablecoin-to-username-twitter.js";
+import { TransferStablecoinFactory } from "./factories/transfers/stablecoin.js";
+import { TransferErc20ToUsernameTwitterFactory } from "./factories/transfers/erc20-to-username-twitter.js";
+import { TransferErc20Factory } from "./factories/transfers/erc20.js";
+import { WithdrawFactory } from "./factories/user/withdraw.js";
+import { CrosschainTransferFactory } from "./factories/blockchain/crosschain-transfer.js";
+import { SwapFactory } from "./factories/blockchain/swap.js";
+import { TransferStablecoinToGmailFactory } from "./factories/transfers/stablecoin-to-gmail.js";
+import { TransferErc20ToGmailFactory } from "./factories/transfers/erc20-to-gmail.js";
 
-const database = new Database();
+const database = new MongoDatabase();
 await database.connect();
 
 try {
   const agent = new Agent();
-  const result = await agent.run("69d85122f12c4b87209988cf", "Envie 0.1 usdc para o endereço 0x3c50ac574F85Ae158e76fc478249Aea49c45622a", "web");
+  const result = await agent.run("69d85122f12c4b87209988cf", "Send 0.1 usdc to my father", "web");
   
   // const result = await CreateErc20Factory().execute({
   //   id: "69d85122f12c4b87209988cf",
@@ -34,8 +36,8 @@ try {
 
   // const result = await TransferStablecoinToUsernameTwitterFactory().execute({
   //   id: "69d85122f12c4b87209988cf",
-  //   value: "1",
-  //   to: "@rackermoonn",
+  //   value: "0.1",
+  //   to: "@0xRodrigo",
   //   token: "USDC",
   //   channel: "twitter"
   // })
@@ -73,6 +75,13 @@ try {
   //   value: "0.1",
   //   tokenIn: "USDC",
   //   tokenOut: "EURC"
+  // })
+
+  // const result = await TransferStablecoinToGmailFactory().execute({
+  //   id: "69d85122f12c4b87209988cf",
+  //   value: "0.1",
+  //   token: "USDC",
+  //   to: "einherjar893@gmail.com"
   // })
 
   // @EinherjarAgent send 1 usdc to @rackermoonn

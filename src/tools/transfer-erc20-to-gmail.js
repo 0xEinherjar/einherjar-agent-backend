@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransferErc20ToGmailFactory } from "../factory/blockchain/transfer-erc20-to-gmail.js";
+import { TransferErc20ToGmailFactory } from "../factories/transfers/erc20-to-gmail.js";
 
 export const transferERC20TokenToGmail = {
   name: "transferERC20TokenToGmail",

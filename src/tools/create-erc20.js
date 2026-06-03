@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CreateErc20Factory } from "../factory/blockchain/create-erc20.js";
+import { CreateErc20Factory } from "../factories/blockchain/create-erc20.js";
 
 export const createERC20Token = {
   name: "createERC20Token",

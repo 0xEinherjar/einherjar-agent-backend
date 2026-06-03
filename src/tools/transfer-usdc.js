@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { TransferStablecoinFactory } from "../factory/blockchain/transfer-stablecoin.js";
+import { TransferStablecoinFactory } from "../factories/transfers/stablecoin.js";
 
 export const transferUsdc = {
   name: "transferUsdc",
-  description: "Transfers usdc tokens from a platform user's account to a specified Ethereum wallet address.",
+  description: "Transfers usdc tokens from a platform user's account to a specified Ethereum wallet address or a saved payment contact label.",
   parameters: z.object({
-    to: z.string().describe("Ethereum wallet address that will receive the usdc tokens."),
+    to: z.string().describe("Ethereum wallet address or saved payment contact label that will receive the usdc tokens."),
     value: z.string().describe("Amount of tokens to be sent, provided as a string."),
     chain: z.string().optional().default(null).describe("Blockchain network to transfer the usdc tokens."),
   }),

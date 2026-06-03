@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransferStablecoinToUsernameTwitterFactory } from "../factory/blockchain/transfer-stablecoin-to-username-twitter.js";
+import { TransferStablecoinToUsernameTwitterFactory } from "../factories/transfers/stablecoin-to-username-twitter.js";
 import { SUPPORTED_CHAINS_EURC } from "../shared/resolve-chain.js";
 
 export const transferEurcToUsername = {
@@ -10,7 +10,7 @@ export const transferEurcToUsername = {
     value: z.string().describe("Amount of EURC tokens to be sent, provided as a string."),
   }),
   handle: async ({ to, value }, runtime) => {
-    const result = await TransferEurcToUsernameTwitterFactory().execute({
+    const result = await TransferStablecoinToUsernameTwitterFactory().execute({
       id: runtime.context?.authorId,
       channel: runtime.context?.channel,
       to,

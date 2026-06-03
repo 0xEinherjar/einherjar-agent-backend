@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransferStablecoinToUsernameTwitterFactory } from "../factory/blockchain/transfer-stablecoin-to-username-twitter.js";
+import { TransferStablecoinToUsernameTwitterFactory } from "../factories/transfers/stablecoin-to-username-twitter.js";
 
 export const transferUsdcToUsername = {
   name: "transferUsdcToUsername",

@@ -1,4 +1,4 @@
-import { RecordMetricFactory } from "../factory/stats/record-metric.js";
+import { RecordMetricFactory } from "../factories/metrics/record.js";
 
 export async function recordMetric({ type, token, amount, chain, userId }) {
   try {

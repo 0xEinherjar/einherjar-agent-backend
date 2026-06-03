@@ -1,14 +1,14 @@
 /**
  * Generates a text message template for a Twitter DM receipt.
- * 
+ *
  * @param {Object} data
  * @param {string} data.senderName - Name or handle of the sender
  * @param {string|number} data.amount - The amount sent
- * @param {string} data.tokenSymbol - Token symbol (e.g., USDC, EURC)
- * @param {string} [data.txHash] - Transaction hash (optional)
- * @param {string} [data.network] - Network name (e.g., Base, Polygon) (optional)
+ * @param {string} data.tokenSymbol - Token symbol or token address
+ * @param {string} [data.txHash] - Transaction hash
+ * @param {string} [data.network] - Network name
  * @param {string} [data.appLink] - Link to the app to claim/view the transfer
- * @returns {string} - Generated message string
+ * @returns {string}
  */
 export const buildTransferReceiptDM = ({
   senderName = "A user",
@@ -18,12 +18,15 @@ export const buildTransferReceiptDM = ({
   network,
   appLink = "https://einherjar.online"
 }) => {
-  return `🚀 You received funds!
+  return `You received funds!
 
 Hello! ${senderName} just sent you digital tokens directly to your X account.
 
-💰 Amount: ${amount} ${tokenSymbol}
-${network ? `🌐 Network: ${network}\n` : ''}${txHash ? `🔗 Hash: ${txHash}\n` : ''}
+Amount: ${amount} ${tokenSymbol}
+${network ? `Network: ${network}\n` : ""}${txHash ? `Hash: ${txHash}\n` : ""}
+To withdraw without logging in, reply to this DM with:
+withdraw 0xYourWalletAddress
+
 Access your wallet and manage your funds by logging into Einherjar:
 ${appLink}
 

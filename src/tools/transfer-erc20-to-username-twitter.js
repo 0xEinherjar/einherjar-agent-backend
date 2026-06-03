@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransferErc20ToUsernameTwitterFactory } from "../factory/blockchain/transfer-erc20-to-username-twitter.js";
+import { TransferErc20ToUsernameTwitterFactory } from "../factories/transfers/erc20-to-username-twitter.js";
 
 export const transferERC20TokenToUsername = {
   name: "transferERC20TokenToUsername",

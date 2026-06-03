@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CrosschainTransferFactory } from "../factory/blockchain/crosschain-transfer.js";
+import { CrosschainTransferFactory } from "../factories/blockchain/crosschain-transfer.js";
 import { SUPPORTED_CHAINS } from "../shared/resolve-chain.js";
 
 export const crosschainTransfer = {
